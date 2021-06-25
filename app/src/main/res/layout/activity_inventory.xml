@@ -11,13 +11,14 @@
         layout="@layout/card_view"
         android:layout_width="380dp"
         android:layout_height="100dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="104dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/marqueeCard"
         layout="@layout/card_view"
         android:layout_width="380dp"
         android:layout_height="100dp"
@@ -30,7 +31,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <include
-        android:id="@+id/include3"
+        android:id="@+id/stretchCard"
         layout="@layout/card_view"
         android:layout_width="380dp"
         android:layout_height="100dp"
@@ -39,19 +40,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/marqueeCard"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginBottom="32dp"
-        android:text="Add structure"
+        android:background="#81C784"
+        android:text="Add structure +"
+        app:backgroundTint="#81C784"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.924"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include3"
+        app:layout_constraintTop_toBottomOf="@+id/stretchCard"
         app:layout_constraintVertical_bias="0.981" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

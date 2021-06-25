@@ -8,13 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-<<<<<<< HEAD
-        android:theme="@style/Theme.Tipistock">
-        <activity android:name=".InventActivity">
-=======
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".LoginActivity">
->>>>>>> login-page
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+    <activity android:name=".InventActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
