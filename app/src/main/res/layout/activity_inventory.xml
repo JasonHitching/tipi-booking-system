@@ -6,23 +6,25 @@
     android:layout_height="match_parent"
     android:background="#FAF8F8">
 
+    <!-- Include a card_view -->
     <include
         android:id="@+id/tipiCard"
         layout="@layout/card_view"
         android:layout_width="380dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Include a card_view -->
     <include
         android:id="@+id/marqueeCard"
         layout="@layout/card_view"
         android:layout_width="380dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -30,12 +32,13 @@
         app:layout_constraintTop_toBottomOf="@+id/tipiCard"
         app:layout_constraintVertical_bias="0.0" />
 
+    <!-- Include a card_view -->
     <include
         android:id="@+id/stretchCard"
         layout="@layout/card_view"
         android:layout_width="380dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -44,17 +47,57 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:id="@+id/addStruct"
+        android:layout_width="125dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="32dp"
         android:background="#81C784"
+        android:padding="0dp"
         android:text="Add structure +"
+        android:textSize="10sp"
         app:backgroundTint="#81C784"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.924"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stretchCard"
-        app:layout_constraintVertical_bias="0.981" />
+        app:layout_constraintVertical_bias="0.072" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:background="#00000000"
+            app:srcCompat="@drawable/home" />
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <TextView
+        android:id="@+id/tipiTitle"
+        android:layout_width="58dp"
+        android:layout_height="50dp"
+        android:fontFamily="cursive"
+        android:text="Tipi"
+        android:textColor="#423E3E"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:translationZ="90dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tipiCard"
+        app:layout_constraintEnd_toEndOf="@+id/tipiCard"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tipiCard"
+        app:layout_constraintVertical_bias="0.13" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
