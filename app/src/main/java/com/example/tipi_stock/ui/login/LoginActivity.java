@@ -1,14 +1,16 @@
-package com.example.tipi_stock;
+package com.example.tipi_stock.ui.login;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class InventActivity extends AppCompatActivity {
+import com.example.tipi_stock.R;
+
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inventory);
+        setContentView(R.layout.activity_login);
     }
 }
