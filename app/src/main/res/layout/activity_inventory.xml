@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:background="#ced4da">
 
-    <!-- Include a tipi card_view -->
+    <!-- Include a tipi invent_card_view -->
     <include
         android:id="@+id/tipiCard"
-        layout="@layout/card_view"
+        layout="@layout/invent_card_view"
         android:layout_width="380dp"
         android:layout_height="150dp"
         android:layout_marginTop="30dp"
@@ -18,10 +18,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Include a marquee card_view -->
+    <!-- Include a marquee invent_card_view -->
     <include
         android:id="@+id/marqueeCard"
-        layout="@layout/card_view"
+        layout="@layout/invent_card_view"
         android:layout_width="380dp"
         android:layout_height="150dp"
         android:layout_marginTop="30dp"
@@ -35,7 +35,7 @@
     <!-- Include a stretch tent card -->
     <include
         android:id="@+id/stretchCard"
-        layout="@layout/card_view"
+        layout="@layout/invent_card_view"
         android:layout_width="380dp"
         android:layout_height="150dp"
         android:layout_marginTop="30dp"
