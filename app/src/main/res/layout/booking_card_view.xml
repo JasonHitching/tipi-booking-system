@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/cardview_shadow_start_color"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
     app:cardCornerRadius="8dp"
     android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/booking_card_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Placeholder text"
+            android:text="Tipi Booking"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/customer_text"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Customer: Jason Hitching"
+            app:layout_constraintBottom_toBottomOf="@+id/booking_card_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/booking_card_text"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:text="09/08/1994"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/customer_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
