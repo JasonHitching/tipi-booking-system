@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.tipi_stock.R;
+import com.example.tipi_stock.backend.bookings.BookingModel;
+import com.example.tipi_stock.backend.bookings.StructureBooking;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class BookingActivity extends AppCompatActivity {
 
@@ -16,26 +21,16 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_booking);
 
         //Initialise the data to be used in RecyclerView
-        String[] data = initialiseDummyData();
-
-        BookingAdapter bookingAdapter = new BookingAdapter(data);
+        BookingAdapter bookingAdapter = new BookingAdapter(obtainBookings());
         RecyclerView bookingRecycler = findViewById(R.id.booking_recycler);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(this));
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
     }
 
-    /**
-     * Generate dummy data for the recycler view
-     * @return string array of data
-     */
-    private String[] initialiseDummyData() {
-        String[] dataset = new String[10];
-
-        for (int i = 0; i < dataset.length; i++) {
-            dataset[i] = "This is position " + i;
-        }
-
-        return dataset;
+    public ArrayList obtainBookings() {
+        BookingModel bookingModel = new BookingModel();
+        ArrayList<StructureBooking> currentBookings = bookingModel.getCurrentBookings();
+        return currentBookings;
     }
 }

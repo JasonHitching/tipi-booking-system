@@ -9,20 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tipi_stock.R;
+import com.example.tipi_stock.backend.bookings.StructureBooking;
+
+import java.util.ArrayList;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHolder> {
 
-    private String[] data;
+    private ArrayList<StructureBooking> bookingData;
 
-    public BookingAdapter(String[] data) {
-        this.data = data;
+    public BookingAdapter(ArrayList<StructureBooking> bookingData) {
+        this.bookingData = bookingData;
     }
-
-
 
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder holder, int position) {
-        holder.setRowData(data[position]);
+        holder.setRowData(bookingData.get(position));
     }
 
     /**
@@ -31,7 +32,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
-        return data.length;
+        return bookingData.size();
     }
 
     /**
@@ -41,16 +42,27 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView bookingTextView;
+        TextView customerTextView;
+        TextView dateTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Obtain the required view from recycler_row.xml
-            bookingTextView = itemView.findViewById(R.id.booking_card_text);
+            bookingTextView = itemView.findViewById(R.id.structure_type_text);
+            customerTextView = itemView.findViewById(R.id.customer_text);
+            dateTextView = itemView.findViewById(R.id.booking_date_text);
         }
 
-        public void setRowData(String text) {
-            bookingTextView.setText(text);
+        /**
+         * Set the booking item data
+         * @param booking booking object passed when a ViewHolder binds
+         */
+        public void setRowData(StructureBooking booking) {
+            bookingTextView.setText(booking.getStructureType());
+            customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
+                    " " + booking.getCustomerLastName());
+            dateTextView.setText(booking.getBookingDate().toString());
         }
     }
 

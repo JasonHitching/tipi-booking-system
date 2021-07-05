@@ -1,13 +1,15 @@
 package com.example.tipi_stock.backend.bookings;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class StructureBooking {
 
     // Instance fields
     private String structureType, customerFirstName, customerLastName;
     private double cost;
-    private Date bookingDate;
+    private LocalDate bookingDate;
     private int noOfDays;
 
     /**
@@ -20,7 +22,7 @@ public class StructureBooking {
      * @param noOfDays number of days the structure will be hired for
      */
     public StructureBooking(String structureType, String customerFirstName, String customerLastName,
-                            double cost, Date bookingDate, int noOfDays) {
+                            double cost, LocalDate bookingDate, int noOfDays) {
         this.structureType = structureType;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -53,11 +55,11 @@ public class StructureBooking {
         this.cost = cost;
     }
 
-    public Date getBookingDate() {
+    public LocalDate getBookingDate() {
         return bookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
+    public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
 
@@ -69,7 +71,6 @@ public class StructureBooking {
         this.noOfDays = noOfDays;
     }
 
-
     public String getStructureType() {
         return structureType;
     }
@@ -77,4 +78,5 @@ public class StructureBooking {
     public void setStructureType(String structureType) {
         this.structureType = structureType;
     }
+
 }
