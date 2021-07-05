@@ -42,17 +42,20 @@ public class BookingModel {
     public void populateData() {
         StructureBooking tipiBooking1 = new StructureBooking("Tipi",
                 "Jason", "Hitching", 1000,
+                LocalDate.of(2021, Month.AUGUST, 9),
                 LocalDate.of(2021, Month.AUGUST, 9), 5);
         currentBookings.add(tipiBooking1);
 
         StructureBooking marqueeBooking = new StructureBooking("Marquee",
                 "James", "Blunt", 2500,
-                LocalDate.of(2021, Month.JUNE, 9), 5);
+                LocalDate.of(2021, Month.JUNE, 9),
+                LocalDate.of(2021, Month.JUNE, 15), 5);
         currentBookings.add(marqueeBooking);
 
         StructureBooking stretchBooking = new StructureBooking("Stretch Tent",
                 "Helen", "Copping", 800,
-                LocalDate.of(2021, Month.NOVEMBER, 23), 5);
+                LocalDate.of(2021, Month.NOVEMBER, 23),
+                LocalDate.of(2021, Month.NOVEMBER, 28),5);
         currentBookings.add(stretchBooking);
     }
 }

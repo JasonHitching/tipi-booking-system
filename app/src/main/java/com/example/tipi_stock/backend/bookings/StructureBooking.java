@@ -1,15 +1,13 @@
 package com.example.tipi_stock.backend.bookings;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 
 public class StructureBooking {
 
     // Instance fields
     private String structureType, customerFirstName, customerLastName;
     private double cost;
-    private LocalDate bookingDate;
+    private LocalDate bookingStartDate, bookingEndDate;
     private int noOfDays;
 
     /**
@@ -18,16 +16,17 @@ public class StructureBooking {
      * @param customerFirstName customers first name
      * @param customerLastName customers last name
      * @param cost price of the booking
-     * @param bookingDate date of the booking
+     * @param bookingStartDate date of the booking
      * @param noOfDays number of days the structure will be hired for
      */
     public StructureBooking(String structureType, String customerFirstName, String customerLastName,
-                            double cost, LocalDate bookingDate, int noOfDays) {
+                            double cost, LocalDate bookingStartDate, LocalDate bookingEndDate, int noOfDays) {
         this.structureType = structureType;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
         this.cost = cost;
-        this.bookingDate = bookingDate;
+        this.bookingStartDate = bookingStartDate;
+        this.bookingEndDate = bookingEndDate;
         this.noOfDays = noOfDays;
     }
 
@@ -55,20 +54,20 @@ public class StructureBooking {
         this.cost = cost;
     }
 
-    public LocalDate getBookingDate() {
-        return bookingDate;
+    public LocalDate getBookingStartDate() {
+        return bookingStartDate;
     }
 
-    public void setBookingDate(LocalDate bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setBookingStartDate(LocalDate bookingStartDate) {
+        this.bookingStartDate = bookingStartDate;
     }
 
-    public int getNoOfDays() {
-        return noOfDays;
+    public LocalDate getBookingEndDate() {
+        return bookingEndDate;
     }
 
-    public void setNoOfDays(int noOfDays) {
-        this.noOfDays = noOfDays;
+    public void setBookingEndDate(LocalDate bookingEndDate) {
+        this.bookingEndDate = bookingEndDate;
     }
 
     public String getStructureType() {

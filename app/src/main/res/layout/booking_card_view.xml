@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/structure_type_text"
@@ -31,39 +30,57 @@
         <TextView
             android:id="@+id/customer_add_text"
             android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_height="17dp"
             android:text="26 King Edward Avenue"
-            app:layout_constraintBottom_toTopOf="@id/customer_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/structure_type_text"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintVertical_bias="0.109" />
 
         <TextView
             android:id="@+id/customer_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
             android:text="Customer: Jason Hitching"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_add_text" />
+            app:layout_constraintTop_toBottomOf="@id/customer_add_text"
+            app:layout_constraintVertical_bias="0.086" />
 
         <TextView
-            android:id="@+id/booking_date_text"
+            android:id="@+id/start_date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="09/08/1994 -"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customer_text"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="3dp"
             android:text="09/08/1994"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textStyle="bold|italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/customer_text"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.638" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/start_date_text"
+            app:layout_constraintTop_toBottomOf="@id/customer_text"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
             android:id="@+id/bin_button"
@@ -73,10 +90,10 @@
             android:src="@drawable/ic_bin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.997"
+            app:layout_constraintHorizontal_bias="0.971"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/booking_date_text"
-             />
+            app:layout_constraintTop_toBottomOf="@+id/start_date_text"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
             android:id="@+id/modify_button"
@@ -86,11 +103,10 @@
             android:src="@drawable/ic_modify"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/bin_button"
-            app:layout_constraintHorizontal_bias="0.997"
+            app:layout_constraintHorizontal_bias="0.975"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/booking_date_text"
-            />
-
+            app:layout_constraintTop_toBottomOf="@+id/start_date_text"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
 
         TextView bookingTextView;
         TextView customerTextView;
-        TextView dateTextView;
+        TextView dateStartTextView;
+        TextView dateEndTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,7 +52,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             // Obtain the required view from recycler_row.xml
             bookingTextView = itemView.findViewById(R.id.structure_type_text);
             customerTextView = itemView.findViewById(R.id.customer_text);
-            dateTextView = itemView.findViewById(R.id.booking_date_text);
+            dateStartTextView = itemView.findViewById(R.id.start_date_text);
+            dateEndTextView = itemView.findViewById(R.id.end_date_text);
         }
 
         /**
@@ -62,7 +64,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             bookingTextView.setText(booking.getStructureType());
             customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
                     " " + booking.getCustomerLastName());
-            dateTextView.setText(booking.getBookingDate().toString());
+            dateStartTextView.setText(booking.getBookingStartDate().toString() + " - ");
+            dateEndTextView.setText(booking.getBookingEndDate().toString());
         }
     }
 
