@@ -1,14 +1,18 @@
 package com.example.tipi_stock.ui.bookings;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tipi_stock.R;
+import com.example.tipi_stock.backend.bookings.DeleteDialogFragment;
 import com.example.tipi_stock.backend.bookings.StructureBooking;
 
 import java.util.ArrayList;
@@ -22,8 +26,29 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder holder, int position) {
-        holder.setRowData(bookingData.get(position));
+    public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder cardHolder, int position) {
+        cardHolder.setRowData(bookingData.get(position));
+
+        // Bind the current ViewHolder with an on click listener that removes the item
+        cardHolder.binButton.setOnClickListener(view -> {
+
+            // Obtain the view context to be used to display the dialog
+            Context viewContext = view.getRootView().getContext();
+
+            // Instantiate an AlertDialog builder for displaying the message popup
+            AlertDialog.Builder deleteDialog = new AlertDialog.Builder(viewContext);
+            deleteDialog.setMessage("Are you sure you want to delete this booking?");
+            deleteDialog.setPositiveButton("Confirm", (dialogInterface, i) -> {
+                bookingData.remove(cardHolder.getAbsoluteAdapterPosition());
+                // Notify listeners (RecyclerView) of the change in data
+                notifyDataSetChanged();
+            });
+            deleteDialog.setNegativeButton("Cancel", (dialogInterface, i) -> {
+
+            });
+
+            deleteDialog.create().show();
+        });
     }
 
     /**
@@ -41,11 +66,13 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView bookingTextView;
-        TextView customerTextView;
-        TextView dateStartTextView;
-        TextView dateEndTextView;
+        TextView bookingTextView, customerTextView, dateStartTextView, dateEndTextView;
+        ImageButton binButton, modifyButton;
 
+        /**
+         * ViewHolder constructor
+         * @param itemView individual row item view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -54,6 +81,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             customerTextView = itemView.findViewById(R.id.customer_text);
             dateStartTextView = itemView.findViewById(R.id.start_date_text);
             dateEndTextView = itemView.findViewById(R.id.end_date_text);
+
+            binButton = itemView.findViewById(R.id.bin_button);
         }
 
         /**
@@ -61,6 +90,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
          * @param booking booking object passed when a ViewHolder binds
          */
         public void setRowData(StructureBooking booking) {
+
+            // Set the text of all required views
             bookingTextView.setText(booking.getStructureType());
             customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
                     " " + booking.getCustomerLastName());
@@ -84,4 +115,5 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         ViewHolder holder = new ViewHolder(itemView);
         return holder;
     }
+
 }
