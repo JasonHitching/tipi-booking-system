@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tipi_stock.R;
 
-public class LoginActivity extends Fragment {
+public class LoginFragment extends Fragment {
 
     View rootView;
 

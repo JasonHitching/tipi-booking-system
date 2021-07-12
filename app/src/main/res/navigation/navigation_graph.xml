@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/bookingFragment">
+
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.example.tipi_stock.ui.bookings.BookingFragment"
+        android:label="BookingFragment" />
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.example.tipi_stock.ui.inventory.InventoryFragment"
+        android:label="InventoryFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.tipi_stock.ui.login.LoginFragment"
+        android:label="LoginFragment" />
+</navigation>
