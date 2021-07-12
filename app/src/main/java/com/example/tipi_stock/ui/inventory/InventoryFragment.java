@@ -1,4 +1,4 @@
-package com.example.tipi_stock.ui.login;
+package com.example.tipi_stock.ui.inventory;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tipi_stock.R;
 
-public class LoginActivity extends Fragment {
+public class InventoryFragment extends Fragment {
 
     View rootView;
 
@@ -22,8 +22,8 @@ public class LoginActivity extends Fragment {
                              @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        rootView = inflater.inflate(R.layout.login_fragment, null);
 
+        rootView = inflater.inflate(R.layout.inventory_fragment, null);
         return rootView;
     }
 

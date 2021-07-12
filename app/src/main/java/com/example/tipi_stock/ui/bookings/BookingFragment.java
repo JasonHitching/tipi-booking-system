@@ -1,0 +1,57 @@
+package com.example.tipi_stock.ui.bookings;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.tipi_stock.R;
+import com.example.tipi_stock.backend.bookings.BookingModel;
+import com.example.tipi_stock.backend.bookings.StructureBooking;
+
+import java.util.ArrayList;
+
+public class BookingFragment extends Fragment {
+
+    private static BookingAdapter bookingAdapter;
+    private static RecyclerView bookingRecycler;
+    ArrayList<StructureBooking> currentBookings;
+    View rootView;
+
+    // Required empty constructor
+    public BookingFragment() {}
+
+    @Nullable
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable @org.jetbrains.annotations.Nullable ViewGroup container,
+                             @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        rootView = inflater.inflate(R.layout.booking_fragment, null);
+
+        return rootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        bookingAdapter = new BookingAdapter(obtainBookings());
+        bookingRecycler = rootView.findViewById(R.id.booking_recycler);
+        bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bookingRecycler.setHasFixedSize(true);
+        bookingRecycler.setAdapter(bookingAdapter);
+    }
+
+
+    public ArrayList obtainBookings() {
+        BookingModel bookingModel = new BookingModel();
+        currentBookings = bookingModel.getCurrentBookings();
+        return currentBookings;
+    }
+}
