@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tipi_stock.R;
-import com.example.tipi_stock.backend.bookings.DeleteDialogFragment;
 import com.example.tipi_stock.backend.bookings.StructureBooking;
 
 import java.util.ArrayList;
