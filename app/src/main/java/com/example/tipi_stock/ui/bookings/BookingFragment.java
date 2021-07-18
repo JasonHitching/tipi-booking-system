@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import com.example.tipi_stock.R;
 import com.example.tipi_stock.backend.bookings.BookingViewModel;
 import com.example.tipi_stock.backend.bookings.StructureBooking;
 import com.example.tipi_stock.backend.data.Booking;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ public class BookingFragment extends Fragment {
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
     private BookingViewModel bookingViewModel;
+
+
     View rootView;
 
     // Required empty constructor
@@ -56,6 +60,13 @@ public class BookingFragment extends Fragment {
 
         // Add a live data observer
         bookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
+
+        FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
+
+        newBookingFab.setOnClickListener(thisView -> {
+            NavHostFragment.findNavController(this).navigate(
+                    R.id.action_booking_nav_to_bookingFormFragment);
+        });
 
     }
 

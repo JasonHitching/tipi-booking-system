@@ -9,7 +9,11 @@
         android:id="@+id/booking_nav"
         android:name="com.example.tipi_stock.ui.bookings.BookingFragment"
         android:label="Booking"
-        tools:layout="@layout/booking_fragment"/>
+        tools:layout="@layout/booking_fragment">
+        <action
+            android:id="@+id/action_booking_nav_to_bookingFormFragment"
+            app:destination="@id/bookingFormFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inventory_nav"
         android:name="com.example.tipi_stock.ui.inventory.InventoryFragment"
@@ -20,4 +24,12 @@
         android:name="com.example.tipi_stock.ui.login.LoginFragment"
         android:label="Login"
         tools:layout="@layout/login_fragment"/>
+    <fragment
+        android:id="@+id/bookingFormFragment"
+        android:name="com.example.tipi_stock.ui.bookings.BookingFormFragment"
+        android:label="BookingFormFragment" >
+        <action
+            android:id="@+id/action_bookingFormFragment_to_booking_nav"
+            app:destination="@id/booking_nav" />
+    </fragment>
 </navigation>
