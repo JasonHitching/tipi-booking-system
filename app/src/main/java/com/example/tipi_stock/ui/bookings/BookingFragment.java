@@ -3,29 +3,35 @@ package com.example.tipi_stock.ui.bookings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tipi_stock.R;
-import com.example.tipi_stock.backend.bookings.BookingModel;
+import com.example.tipi_stock.backend.bookings.BookingViewModel;
 import com.example.tipi_stock.backend.bookings.StructureBooking;
+import com.example.tipi_stock.backend.data.Booking;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookingFragment extends Fragment {
 
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
-    ArrayList<StructureBooking> currentBookings;
+    private BookingViewModel bookingViewModel;
     View rootView;
 
     // Required empty constructor
-    public BookingFragment() {}
+    public BookingFragment() {
+    }
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -41,17 +47,16 @@ public class BookingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        bookingAdapter = new BookingAdapter(obtainBookings());
         bookingRecycler = rootView.findViewById(R.id.booking_recycler);
-        bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bookingAdapter = new BookingAdapter(getContext());
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
+        bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
+
+        // Add a live data observer
+        bookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
+
     }
 
-
-    public ArrayList obtainBookings() {
-        BookingModel bookingModel = new BookingModel();
-        currentBookings = bookingModel.getCurrentBookings();
-        return currentBookings;
-    }
 }

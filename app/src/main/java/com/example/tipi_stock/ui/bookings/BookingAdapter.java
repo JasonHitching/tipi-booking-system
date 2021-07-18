@@ -12,21 +12,44 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tipi_stock.R;
-import com.example.tipi_stock.backend.bookings.StructureBooking;
+import com.example.tipi_stock.backend.data.Booking;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHolder> {
 
-    private ArrayList<StructureBooking> bookingData;
+    private List<Booking> bookingData;
+    private LayoutInflater layoutInflater;
 
-    public BookingAdapter(ArrayList<StructureBooking> bookingData) {
-        this.bookingData = bookingData;
+    public BookingAdapter(Context context) {
+        // Create a layout inflater from the instantiating fragments context
+        layoutInflater = LayoutInflater.from(context);
+    }
+
+    /**
+     * Overridden method for creating and initialising a ViewHolder and related View
+     *
+     * @param parent new views added to the parent ViewGroup
+     * @param viewType view type of new view
+     * @return
+     */
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = layoutInflater.inflate(
+                R.layout.booking_card_view, parent, false);
+        ViewHolder holder = new ViewHolder(itemView);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder cardHolder, int position) {
-        cardHolder.setRowData(bookingData.get(position));
+        System.out.println(position);
+        if (bookingData != null ) {
+            cardHolder.setRowData(bookingData.get(0));
+        } else {
+            System.out.println("hi");
+        }
 
         // Bind the current ViewHolder with an on click listener that removes the item
         cardHolder.binButton.setOnClickListener(view -> {
@@ -56,7 +79,16 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
-        return bookingData.size();
+        if (bookingData != null) {
+            return bookingData.size();
+        } else {
+            return 0;
+        }
+    }
+
+    void setBookings(List<Booking> currentBookings) {
+        bookingData = currentBookings;
+        notifyDataSetChanged();
     }
 
     /**
@@ -88,31 +120,16 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
          * Set the booking item data
          * @param booking booking object passed when a ViewHolder binds
          */
-        public void setRowData(StructureBooking booking) {
+        public void setRowData(Booking booking) {
 
             // Set the text of all required views
             bookingTextView.setText(booking.getStructureType());
             customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
                     " " + booking.getCustomerLastName());
-            dateStartTextView.setText(booking.getBookingStartDate().toString() + " - ");
-            dateEndTextView.setText(booking.getBookingEndDate().toString());
+            dateStartTextView.setText(booking.getBookingStartDate().toString());
         }
     }
 
-    /**
-     * Overridden method for creating and initialising a ViewHolder and related View
-     *
-     * @param parent new views added to the parent ViewGroup
-     * @param viewType view type of new view
-     * @return
-     */
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(
-                R.layout.booking_card_view, parent, false);
-        ViewHolder holder = new ViewHolder(itemView);
-        return holder;
-    }
+
 
 }

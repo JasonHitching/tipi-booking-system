@@ -20,7 +20,7 @@ public interface BookingDao {
      * @return list of bookings
      */
     @Query("SELECT * from booking_table")
-    LiveData<List> getAllBookings();
+    LiveData<List<Booking>> getAllBookings();
 
     /**
      * SQL insert for adding a booking to the booking databse
