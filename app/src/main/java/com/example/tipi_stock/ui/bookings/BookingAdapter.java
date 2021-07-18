@@ -44,11 +44,13 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder cardHolder, int position) {
+
         System.out.println(position);
+        // If the booking data exists
         if (bookingData != null ) {
-            cardHolder.setRowData(bookingData.get(0));
+            cardHolder.setRowData(bookingData.get(position));
         } else {
-            System.out.println("hi");
+            // Maybe try display "no bookings" ??
         }
 
         // Bind the current ViewHolder with an on click listener that removes the item
@@ -79,6 +81,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
+        // initially booking data will be null until it updates from the database
         if (bookingData != null) {
             return bookingData.size();
         } else {
@@ -86,7 +89,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         }
     }
 
-    void setBookings(List<Booking> currentBookings) {
+    // Method called when the live data in room database changes
+    public void setBookings(List<Booking> currentBookings) {
         bookingData = currentBookings;
         notifyDataSetChanged();
     }

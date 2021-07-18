@@ -23,7 +23,7 @@ public abstract class BookingDatabase extends RoomDatabase {
 
     public abstract BookingDao bookingDao();
 
-    private static BookingDatabase dbInstance;
+    private static volatile BookingDatabase dbInstance;
 
     private static ExecutorService databaseExecutor =
             Executors.newFixedThreadPool(4);
@@ -35,7 +35,6 @@ public abstract class BookingDatabase extends RoomDatabase {
                 if (dbInstance == null) {
                     dbInstance = Room.databaseBuilder(context.getApplicationContext(),
                             BookingDatabase.class, "booking_db")
-                            .fallbackToDestructiveMigration()
                             .addCallback(insertCallback)
                             .build();
                 }
@@ -45,35 +44,44 @@ public abstract class BookingDatabase extends RoomDatabase {
     }
 
     private static RoomDatabase.Callback insertCallback = new RoomDatabase.Callback() {
-        /**
-         * Pre-populate database data (CHANGE THIS TO READING FROM A .DB FILE)
-         * https://developer.android.com/training/data-storage/room/prepopulate
-         */
         @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            // Write to the database on a worker thread (so as not to clog up the main thread)
-            databaseExecutor.execute(() -> {
-                BookingDao dao = dbInstance.bookingDao();
-
-                // Start with a fresh database
-                dao.deleteAllBookings();
-
-                Booking stretchBooking = new Booking(1, "Stetch Tent",
-                        "Helen", "Copping", 800,
-                        "09/08/1994",
-                        5);
-                dao.insertBooking(stretchBooking);
-
-                Booking stretchBooking2 = new Booking(2, "Stetch Tent",
-                        "Helen", "Copping", 800,
-                        "09/08/1994",
-                        5);
-                dao.insertBooking(stretchBooking);
-
-            });
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+            prepopulateBookingData();
         }
     };
 
+    /**
+     * Pre-populate the Room database with data
+     * POTENTIALLY SEPERATE DATA INTO A .DB FILE?
+     */
+    public static void prepopulateBookingData() {
+        // Write to the database on a worker thread (so as not to clog up the main thread)
+        databaseExecutor.execute(() -> {
+            BookingDao dao = dbInstance.bookingDao();
+
+            // Start with a fresh database each load
+            dao.deleteAllBookings();
+
+            Booking stretchBooking = new Booking(1, "Stetch Tent",
+                    "Joe", "Copping", 800,
+                    "09/08/1994",
+                    5);
+            dao.insertBooking(stretchBooking);
+
+            Booking tipiBooking = new Booking(2, "Tipi",
+                    "Jason", "Hitching", 233,
+                    "09/2/1994",
+                    10);
+            dao.insertBooking(tipiBooking);
+
+            Booking marqueeBooking = new Booking(3, "Marquee",
+                    "Daniel", "Rose", 500,
+                    "09/2/1994",
+                    2);
+            dao.insertBooking(marqueeBooking);
+
+            databaseExecutor.shutdown();
+        });
+    }
 }

@@ -48,7 +48,7 @@ public class BookingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         bookingRecycler = rootView.findViewById(R.id.booking_recycler);
-        bookingAdapter = new BookingAdapter(getContext());
+        bookingAdapter = new BookingAdapter(getActivity());
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
