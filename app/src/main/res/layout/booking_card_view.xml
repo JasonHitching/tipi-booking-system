@@ -17,11 +17,11 @@
 
         <TextView
             android:id="@+id/structure_type_text"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="155dp"
+            android:layout_height="38dp"
             android:text="Tipi Booking"
-            android:textStyle="bold"
             android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/customer_add_text"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:text="Address: 26 King Edward Avenue"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,25 +92,26 @@
             android:background="#00FFFFFF"
             android:onClick="clicked"
             android:src="@drawable/ic_bin"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/customer_add_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_date_text"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintHorizontal_bias="0.964"
+            app:layout_constraintStart_toEndOf="@+id/structure_type_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/modify_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginStart="100dp"
             android:background="#00FFFFFF"
             android:src="@drawable/ic_modify"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/customer_add_text"
             app:layout_constraintEnd_toStartOf="@id/bin_button"
-            app:layout_constraintHorizontal_bias="0.975"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_date_text"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/structure_type_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
