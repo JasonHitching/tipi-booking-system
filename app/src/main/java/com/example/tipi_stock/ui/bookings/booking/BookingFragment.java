@@ -1,4 +1,4 @@
-package com.example.tipi_stock.ui.bookings;
+package com.example.tipi_stock.ui.bookings.booking;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,15 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tipi_stock.R;
-import com.example.tipi_stock.backend.bookings.BookingViewModel;
+import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookingFragment extends Fragment {
 
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
-    private BookingViewModel bookingViewModel;
-
+    private SharedBookingViewModel sharedBookingViewModel;
 
     View rootView;
 
@@ -49,10 +48,10 @@ public class BookingFragment extends Fragment {
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
+        sharedBookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
 
         // Add a live data observer
-        bookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
+        sharedBookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
 
         FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
 

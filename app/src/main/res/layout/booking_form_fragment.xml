@@ -17,13 +17,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/structure_type_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="380dp"
             android:layout_height="60dp"
             android:hint="Structure type">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/structure_type_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -35,7 +35,6 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/customer_first_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="185dp"
                 android:layout_height="match_parent"
@@ -43,19 +42,20 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/customer_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/customer_last_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="185dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/customer_last_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Customer last name" />
@@ -95,13 +95,13 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/booking_cost"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/booking_cost"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Booking cost" />
@@ -109,13 +109,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/num_days_input"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/num_days_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Number of days" />
@@ -124,7 +124,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit_form_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"

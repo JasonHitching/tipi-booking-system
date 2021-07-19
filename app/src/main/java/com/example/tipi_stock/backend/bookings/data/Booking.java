@@ -1,4 +1,4 @@
-package com.example.tipi_stock.backend.data;
+package com.example.tipi_stock.backend.bookings.data;
 
 
 
@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "booking_table")
 public class Booking {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     public String structureType;
@@ -26,8 +26,7 @@ public class Booking {
 
     public int numberOfDays;
 
-    public Booking(int id, String structureType, String customerFirstName, String customerLastName, double cost, String bookingStartDate, int numberOfDays) {
-        this.id = id;
+    public Booking( String structureType, String customerFirstName, String customerLastName, double cost, String bookingStartDate, int numberOfDays) {
         this.structureType = structureType;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;

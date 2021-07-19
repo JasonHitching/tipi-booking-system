@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/booking_nav"
-        android:name="com.example.tipi_stock.ui.bookings.BookingFragment"
+        android:name="com.example.tipi_stock.ui.bookings.booking.BookingFragment"
         android:label="Booking"
         tools:layout="@layout/booking_fragment">
         <action
@@ -26,7 +26,7 @@
         tools:layout="@layout/login_fragment"/>
     <fragment
         android:id="@+id/bookingFormFragment"
-        android:name="com.example.tipi_stock.ui.bookings.BookingFormFragment"
+        android:name="com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment"
         android:label="BookingFormFragment" >
         <action
             android:id="@+id/action_bookingFormFragment_to_booking_nav"

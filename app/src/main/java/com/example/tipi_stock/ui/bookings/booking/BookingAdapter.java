@@ -1,4 +1,4 @@
-package com.example.tipi_stock.ui.bookings;
+package com.example.tipi_stock.ui.bookings.booking;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tipi_stock.R;
-import com.example.tipi_stock.backend.data.Booking;
+import com.example.tipi_stock.backend.bookings.data.Booking;
 
 import java.util.List;
 

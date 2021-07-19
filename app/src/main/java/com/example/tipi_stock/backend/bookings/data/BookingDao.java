@@ -1,4 +1,4 @@
-package com.example.tipi_stock.backend.data;
+package com.example.tipi_stock.backend.bookings.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

@@ -1,4 +1,4 @@
-package com.example.tipi_stock.backend.data;
+package com.example.tipi_stock.backend.bookings.data;
 
 import android.app.Application;
 
@@ -22,4 +22,12 @@ public class BookingRepository {
     public LiveData<List<Booking>> getAllBookings() {
         return currentBookings;
     }
+
+    /**
+     * Insert a new booking into the database
+     * @param newBooking booking object
+     */
+    public void insertBooking(Booking newBooking) {
+        BookingDatabase.databaseExecutor.execute(() -> bookingDao.insertBooking(newBooking));
+        }
 }
