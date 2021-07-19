@@ -1,13 +1,12 @@
-package com.example.tipi_stock.backend.bookings;
+package com.example.tipi_stock.ui.bookings.booking;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.tipi_stock.backend.data.Booking;
-import com.example.tipi_stock.backend.data.BookingRepository;
+import com.example.tipi_stock.backend.bookings.data.Booking;
+import com.example.tipi_stock.backend.bookings.data.BookingRepository;
 
 import java.util.List;
 

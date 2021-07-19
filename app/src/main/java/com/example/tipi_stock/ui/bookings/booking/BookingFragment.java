@@ -3,13 +3,11 @@ package com.example.tipi_stock.ui.bookings;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.backend.bookings.BookingViewModel;
-import com.example.tipi_stock.backend.bookings.StructureBooking;
-import com.example.tipi_stock.backend.data.Booking;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookingFragment extends Fragment {
 
