@@ -81,18 +81,6 @@ public abstract class BookingDatabase extends RoomDatabase {
                     2);
             dao.insertBooking(marqueeBooking);
 
-            Booking marqueeBooking2 = new Booking(4, "Marquee",
-                    "Daniel", "Rose", 500,
-                    "09/2/1994",
-                    2);
-            dao.insertBooking(marqueeBooking2);
-
-            Booking marqueeBooking3 = new Booking(5, "Marquee",
-                    "Daniel", "Rose", 500,
-                    "09/2/1994",
-                    2);
-            dao.insertBooking(marqueeBooking3);
-
             databaseExecutor.shutdown();
         });
     }

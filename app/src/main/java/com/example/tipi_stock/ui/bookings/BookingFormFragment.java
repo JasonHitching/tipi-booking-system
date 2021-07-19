@@ -6,11 +6,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.tipi_stock.R;
+
+import java.util.Objects;
 
 public class BookingFormFragment extends Fragment {
 
@@ -24,7 +27,6 @@ public class BookingFormFragment extends Fragment {
                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.booking_form_fragment, null);
-
 
         return rootView;
     }
