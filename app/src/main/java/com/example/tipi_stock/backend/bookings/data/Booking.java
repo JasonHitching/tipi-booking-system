@@ -20,16 +20,20 @@ public class Booking {
 
     public String customerLastName;
 
+    public String customerAddress;
+
     public double cost;
 
     public String bookingStartDate;
 
     public int numberOfDays;
 
-    public Booking( String structureType, String customerFirstName, String customerLastName, double cost, String bookingStartDate, int numberOfDays) {
+    public Booking( String structureType, String customerFirstName, String customerLastName,
+                    String customerAddress, double cost, String bookingStartDate, int numberOfDays) {
         this.structureType = structureType;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
+        this.customerAddress = customerAddress;
         this.cost = cost;
         this.bookingStartDate = bookingStartDate;
         this.numberOfDays = numberOfDays;
@@ -50,6 +54,8 @@ public class Booking {
     public String getCustomerLastName() {
         return customerLastName;
     }
+
+    public String getCustomerAddress() { return customerAddress; }
 
     public double getCost() {
         return cost;

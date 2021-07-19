@@ -43,18 +43,19 @@ public class SharedBookingViewModel extends AndroidViewModel {
 //        roomRepo.deleteWord(discardedBooking);
 //    }
 
-    public void createBooking(String structType, String firstName, String lastName,
+    public void createBooking(String structType, String firstName, String lastName, String address,
                                 String cost, String startDate, String noOfDays) {
         double costVal = 0.0;
         int numOfDays = 0;
 
+        // Try catch to prevent program crash if an attempt is made to convert non integer/double
         try {
             costVal = Double.parseDouble(cost);
             numOfDays = Integer.parseInt(noOfDays);
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
         }
-        Booking newBooking = new Booking(structType, firstName, lastName, costVal, startDate, numOfDays);
+        Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
         roomRepo.insertBooking(newBooking);
     }
 

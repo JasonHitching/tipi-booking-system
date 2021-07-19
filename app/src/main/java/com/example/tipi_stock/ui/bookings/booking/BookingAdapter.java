@@ -44,8 +44,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.ViewHolder cardHolder, int position) {
-
-        System.out.println(position);
         // If the booking data exists
         if (bookingData != null ) {
             cardHolder.setRowData(bookingData.get(position));
@@ -101,7 +99,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView bookingTextView, customerTextView, dateStartTextView, dateEndTextView;
+        TextView bookingTextView, customerTextView, customerAddText, dateStartTextView, dateEndTextView;
         ImageButton binButton, modifyButton;
 
         /**
@@ -116,6 +114,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             customerTextView = itemView.findViewById(R.id.customer_text);
             dateStartTextView = itemView.findViewById(R.id.start_date_text);
             dateEndTextView = itemView.findViewById(R.id.end_date_text);
+            customerAddText = itemView.findViewById(R.id.customer_add_text);
 
             binButton = itemView.findViewById(R.id.bin_button);
         }
@@ -130,6 +129,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             bookingTextView.setText(booking.getStructureType());
             customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
                     " " + booking.getCustomerLastName());
+            customerAddText.setText("Address: " + booking.getCustomerAddress());
             dateStartTextView.setText(booking.getBookingStartDate().toString());
         }
     }

@@ -2,6 +2,7 @@ package com.example.tipi_stock.ui.bookings.booking_form;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
@@ -26,10 +28,11 @@ public class BookingFormFragment extends Fragment {
     private View rootView;
     private MaterialDatePicker bookingDateSelector;
     private ImageButton calendarButton;
-    private TextInputEditText dateText, structureText, firstNameText, lastNameText, costText, daysText;
+    private TextInputEditText dateText, structureText, firstNameText, lastNameText, costText, daysText,
+                                firstLineAddress, postcode, houseNumber;
     private TextInputLayout dateTextLayout;
     private SharedBookingViewModel bookingViewModel;
-    private Button submitButton;
+    private Button submitButton, cancelButton;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -44,6 +47,8 @@ public class BookingFormFragment extends Fragment {
                 .setTitleText("Select booking date")
                 .build();
 
+
+
         // Locate all input fields and assign them to relevant variables
         dateTextLayout = rootView.findViewById(R.id.desired_date);
         dateText = rootView.findViewById(R.id.selected_date);
@@ -52,10 +57,14 @@ public class BookingFormFragment extends Fragment {
         lastNameText = rootView.findViewById(R.id.customer_last_name);
         costText = rootView.findViewById(R.id.booking_cost);
         daysText = rootView.findViewById(R.id.num_days_text);
+        firstLineAddress = rootView.findViewById(R.id.address_text);
+        postcode = rootView.findViewById(R.id.postcode_text);
+        houseNumber = rootView.findViewById(R.id.house_number_text);
 
         // Handle form buttons
         submitButton = rootView.findViewById(R.id.submit_form_button);
         calendarButton = rootView.findViewById(R.id.calander_button);
+        cancelButton = rootView.findViewById(R.id.cancel_booking_button);
 
         // Reference the shared view model for both BookingFormFragment and BookingForm
         bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
@@ -79,14 +88,26 @@ public class BookingFormFragment extends Fragment {
             dateTextLayout.setHint("Selected date");
         });
 
+        cancelButton.setOnClickListener(cancelButton -> {
+            NavHostFragment.findNavController(this).popBackStack();
+        });
+
         submitButton.setOnClickListener(buttonComp -> {
+            String customerAddress = houseNumber.getText().toString() + " - "
+                    + firstLineAddress.getText().toString() + " - "
+                    + postcode.getText().toString();
+
             bookingViewModel.createBooking(
                     Objects.requireNonNull(structureText.getText()).toString(),
                     Objects.requireNonNull(firstNameText.getText()).toString(),
                     Objects.requireNonNull(lastNameText.getText()).toString(),
+                    customerAddress,
                     Objects.requireNonNull(costText.getText()).toString(),
                     Objects.requireNonNull(dateText.getText()).toString(),
                     Objects.requireNonNull(daysText.getText()).toString());
+
+            NavHostFragment.findNavController(this).popBackStack();
         });
     }
+
 }
