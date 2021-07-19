@@ -90,7 +90,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="#00FFFFFF"
-            android:onClick="clicked"
             android:src="@drawable/ic_bin"
             app:layout_constraintBottom_toTopOf="@+id/customer_add_text"
             app:layout_constraintEnd_toEndOf="parent"
