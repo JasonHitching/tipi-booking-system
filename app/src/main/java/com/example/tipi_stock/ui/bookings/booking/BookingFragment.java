@@ -17,13 +17,20 @@ import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+/**
+ * Booking fragment displays the booking recycler and existing bookings from the Room database
+ *
+ * Select functionality from Android Jetpack library classes are utilised
+ * to achieve some of the required functionality for this class:
+ *      https://developer.android.com/reference/androidx/fragment/app/Fragment
+ */
 public class BookingFragment extends Fragment {
 
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
     private SharedBookingViewModel sharedBookingViewModel;
 
-    View rootView;
+    private View rootView;
 
     // Required empty constructor
     public BookingFragment() {

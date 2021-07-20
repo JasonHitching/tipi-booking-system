@@ -16,6 +16,16 @@ import com.example.tipi_stock.backend.bookings.data.Booking;
 
 import java.util.List;
 
+/**
+ * Adapter class used to create ViewHolder objects as required
+ * and bind the required data to said view holder objects
+ *
+ * Select functionality from Android Jetpack library classes are utilised
+ * to achieve some of the required functionality for this class:
+ *      https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView
+ *      https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter
+ *      https://developer.android.com/reference/android/app/AlertDialog.Builder?hl=en
+ */
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHolder> {
 
     private List<Booking> bookingData;
@@ -57,7 +67,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             // Obtain the view context to be used to display the dialog
             Context viewContext = view.getRootView().getContext();
 
-            // Instantiate an AlertDialog builder for displaying the message popup
             AlertDialog.Builder deleteDialog = new AlertDialog.Builder(viewContext);
             deleteDialog.setMessage("Are you sure you want to delete this booking?");
             deleteDialog.setPositiveButton("Confirm", (dialogInterface, i) -> {
@@ -96,6 +105,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
     /**
      * ViewHolder class provides a wrapper for around a View, contains layout for individual
      * items in the list
+     *
+     * https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
