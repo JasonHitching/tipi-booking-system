@@ -26,15 +26,15 @@ public class DateConverter {
 
     /**
      * Type converter for converting a date to a timestamp
-     * @param date
-     * @return
+     * @param dateToConvert
+     * @return converted date
      */
     @TypeConverter
-    public static Long convertDateToTimestamp(Date date) {
-        if (date == null) {
+    public static Long convertDateToTimestamp(Date dateToConvert) {
+        if (dateToConvert == null) {
             return null;
         } else {
-            return date.getTime();
+            return dateToConvert.getTime();
         }
     }
 }

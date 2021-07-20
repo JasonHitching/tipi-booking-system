@@ -6,12 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Booking.class}, version = 3, exportSchema = true)
+@TypeConverters({DateConverter.class})
 public abstract class BookingDatabase extends RoomDatabase {
 
     public abstract BookingDao bookingDao();
