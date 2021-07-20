@@ -26,30 +26,59 @@ public class Tipi {
         clevisPinsQuantity = 20;
     }
 
+    /**
+     * Leg quantity accessor
+     * @return leg quantity per Tipi
+     */
     public int getLegQuantity() {
         return legQuantity;
     }
 
+    /**
+     * Medium ground stake quantity accessor
+     * @return medium ground stake quantity per Tipi
+     */
     public int getMediumGroundStakeQuantity() {
         return mediumGroundStakeQuantity;
     }
 
+    /**
+     * Large ground stake quantity accessor
+     * @return large ground stake quantity per Tipi
+     */
     public int getLargeGroundStakeQuantity() {
         return largeGroundStakeQuantity;
     }
 
+    /**
+     * Fairy light quantity accessor
+     * @return fairy light quantity per Tipi
+     */
     public int getFairyLightQuantity() {
         return fairyLightQuantity;
     }
 
+    /**
+     * Clevis pin quantity accessor
+     * @return clevis pin quantity per Tipi
+     */
     public int getClevisPinsQuantity() {
         return clevisPinsQuantity;
     }
 
+    /**
+     * Components array accessor
+     * @return components array
+     */
     public String[] getComponents() {
         return components;
     }
 
+    /**
+     * Overridden toString method, returning a string
+     * representation of the class instance fields
+     * @return string representation of class
+     */
     @NonNull
     @Override
     public String toString() {
