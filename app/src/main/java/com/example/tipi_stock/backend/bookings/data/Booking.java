@@ -5,6 +5,8 @@ package com.example.tipi_stock.backend.bookings.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDate;
+
 /**
  * Entity model of a structure booking
  */
@@ -24,12 +26,12 @@ public class Booking {
 
     public double cost;
 
-    public String bookingStartDate;
+    public LocalDate bookingStartDate;
 
     public int numberOfDays;
 
-    public Booking( String structureType, String customerFirstName, String customerLastName,
-                    String customerAddress, double cost, String bookingStartDate, int numberOfDays) {
+    public Booking(String structureType, String customerFirstName, String customerLastName,
+                   String customerAddress, double cost, LocalDate bookingStartDate, int numberOfDays) {
         this.structureType = structureType;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;
@@ -61,7 +63,7 @@ public class Booking {
         return cost;
     }
 
-    public String getBookingStartDate() {
+    public LocalDate getBookingStartDate() {
         return bookingStartDate;
     }
 

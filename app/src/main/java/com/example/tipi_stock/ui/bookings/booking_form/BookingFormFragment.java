@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,10 +18,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -91,6 +95,7 @@ public class BookingFormFragment extends Fragment {
         // Respond to user selected date input
         bookingDateSelector.addOnPositiveButtonClickListener(selection -> {
             dateText.setText(bookingDateSelector.getHeaderText());
+            System.out.println(bookingDateSelector.getHeaderText());
             dateTextLayout.setHint("Selected date");
         });
 
@@ -103,13 +108,16 @@ public class BookingFormFragment extends Fragment {
                     + firstLineAddress.getText().toString() + " - "
                     + postcode.getText().toString();
 
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
+            String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
+
             String result = bookingViewModel.createBooking(
                     Objects.requireNonNull(structureText.getText()).toString(),
                     Objects.requireNonNull(firstNameText.getText()).toString(),
                     Objects.requireNonNull(lastNameText.getText()).toString(),
                     customerAddress,
                     Objects.requireNonNull(costText.getText()).toString(),
-                    Objects.requireNonNull(dateText.getText()).toString(),
+                    LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
                     Objects.requireNonNull(daysText.getText()).toString());
 
             // If the booking wasn't a success, display a dialog window the the reason
@@ -126,5 +134,53 @@ public class BookingFormFragment extends Fragment {
             }
         });
     }
+
+//    public Date convertTextDate(String date) {
+//        String[] splitDate = date.replaceAll(",", "").split(" ");
+//        Date bookingDate = new Date();
+//
+//        int dayMonth = Integer.parseInt(splitDate[1]);
+//        int year = Integer.parseInt(splitDate[2]);
+//
+//        switch (splitDate[0].toLowerCase()) {
+//            case "jan":
+//                bookingDate = new Date(year, 1, dayMonth);
+//                break;
+//            case "feb":
+//                bookingDate = new Date(year, 2, dayMonth);
+//                break;
+//            case "mar":
+//                bookingDate = new Date(year, 3, dayMonth);
+//                break;
+//            case "apr":
+//                bookingDate = new Date(year, 4, dayMonth);
+//                break;
+//            case "may":
+//                bookingDate = new Date(year, 5, dayMonth);
+//                break;
+//            case "jun":
+//                bookingDate = new Date(year, 6, dayMonth);
+//                break;
+//            case "jul":
+//                bookingDate = new Date(year, 7, dayMonth);
+//                break;
+//            case "aug":
+//                bookingDate = new Date(year, 8, dayMonth);
+//                break;
+//            case "sep":
+//                bookingDate = new Date(year, 9, dayMonth);
+//                break;
+//            case "oct":
+//                bookingDate = new Date(year, 10, dayMonth);
+//                break;
+//            case "nov":
+//                bookingDate = new Date(year, 11, dayMonth);
+//                break;
+//            case "dec":
+//                bookingDate = new Date(year, 12, dayMonth);
+//                break;
+//        }
+//        return bookingDate;
+//    }
 
 }

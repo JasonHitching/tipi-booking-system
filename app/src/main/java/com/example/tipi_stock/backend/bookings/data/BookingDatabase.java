@@ -10,10 +10,12 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Booking.class}, version = 3, exportSchema = true)
+@Database(entities = {Booking.class}, version = 5, exportSchema = true)
 @TypeConverters({DateConverter.class})
 public abstract class BookingDatabase extends RoomDatabase {
 
@@ -63,20 +65,19 @@ public abstract class BookingDatabase extends RoomDatabase {
             Booking stretchBooking = new Booking("Stetch Tent",
                     "Joe", "Copping",
                     "1 Pleasant Drive GT53DP",800,
-                    "09/08/1994",
-                    5);
+                    LocalDate.of(2021, 8, 1), 5);
             dao.insertBooking(stretchBooking);
 
             Booking tipiBooking = new Booking( "Tipi",
                     "Jason", "Hitching",
-                    "76 Inway Drive KL25TP", 233, "09/2/1994",
-                    10);
+                    "76 Inway Drive KL25TP", 233,
+                    LocalDate.of(2021, 8, 1), 10);
             dao.insertBooking(tipiBooking);
 
             Booking marqueeBooking = new Booking( "Marquee",
                     "Daniel", "Rose",
-                    "26 Flyway Drive TY5YYH",500, "09/2/1994",
-                    2);
+                    "26 Flyway Drive TY5YYH",500,
+                    LocalDate.of(2021, 8, 1), 2);
             dao.insertBooking(marqueeBooking);
 
         });

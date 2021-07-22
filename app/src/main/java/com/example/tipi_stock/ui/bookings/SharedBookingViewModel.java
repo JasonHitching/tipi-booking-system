@@ -9,7 +9,7 @@ import com.example.tipi_stock.backend.bookings.data.Booking;
 import com.example.tipi_stock.backend.bookings.data.BookingRepository;
 
 import java.time.LocalDate;
-import java.time.Month;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,14 +68,12 @@ public class SharedBookingViewModel extends AndroidViewModel {
      * @param noOfDays Number of days the structure will be booked for
      */
     public String createBooking(String structType, String firstName, String lastName, String address,
-                                String cost, String startDate, String noOfDays) {
+                                String cost, LocalDate startDate, String noOfDays) {
 
-        String[] splitDate = startDate.replaceAll(",", "").split(" ");
         double costVal = 0.0;
-        int numOfDays = 0,
-                dayMonth = Integer.parseInt(splitDate[1]),
-                year  = Integer.parseInt(splitDate[2]);
-        LocalDate bookingDate = LocalDate.of(2020, Month.JULY, 3);
+        int numOfDays = 0;
+
+        LocalDate todaysDate = LocalDate.now();
 
         // Try-catch to prevent program crash if an attempt is made to convert non integer/double
         try {
@@ -85,46 +83,7 @@ public class SharedBookingViewModel extends AndroidViewModel {
             System.out.println(e.getMessage());
         }
 
-        switch (splitDate[0].toLowerCase()) {
-            case "sep":
-                bookingDate = LocalDate.of(year, Month.SEPTEMBER, dayMonth);
-                break;
-            case "oct":
-                bookingDate = LocalDate.of(year, Month.OCTOBER, dayMonth);
-                break;
-            case "nov":
-                bookingDate = LocalDate.of(year, Month.NOVEMBER, dayMonth);
-                break;
-            case "dec":
-                bookingDate = LocalDate.of(year, Month.DECEMBER, dayMonth);
-                break;
-            case "jan":
-                bookingDate = LocalDate.of(year, Month.JANUARY, dayMonth);
-                break;
-            case "feb":
-                bookingDate = LocalDate.of(year, Month.FEBRUARY, dayMonth);
-                break;
-            case "mar":
-                bookingDate = LocalDate.of(year, Month.MARCH, dayMonth);
-                break;
-            case "apr":
-                bookingDate = LocalDate.of(year, Month.APRIL, dayMonth);
-                break;
-            case "may":
-                bookingDate = LocalDate.of(year, Month.MAY, dayMonth);
-                break;
-            case "jun":
-                bookingDate = LocalDate.of(year, Month.JUNE, dayMonth);
-                break;
-            case "jul":
-                bookingDate = LocalDate.of(year, Month.JULY, dayMonth);
-                break;
-            case "aug":
-                bookingDate = LocalDate.of(year, Month.AUGUST, dayMonth);
-                break;
-        }
-
-        if (bookingDate.isBefore(LocalDate.now())) {
+        if (startDate.isBefore(todaysDate)) {
             System.out.println("nah");
             return "Booking date entered is in the past";
         } else {

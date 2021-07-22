@@ -2,6 +2,7 @@ package com.example.tipi_stock.backend.bookings.data;
 
 import androidx.room.TypeConverter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,15 +13,15 @@ public class DateConverter {
 
     /**
      * Type converter for converting a timestamp to a Date object
-     * @param timestamp
+     * @param stringToConvert
      * @return a new Date object
      */
     @TypeConverter
-    public static Date convertFromTimestamp(Long timestamp) {
-        if (timestamp == null) {
+    public static LocalDate convertFromTimestamp(String stringToConvert) {
+        if (stringToConvert == null) {
             return null;
         } else {
-            return new Date(timestamp);
+            return LocalDate.parse(stringToConvert);
         }
     }
 
@@ -30,11 +31,11 @@ public class DateConverter {
      * @return converted date
      */
     @TypeConverter
-    public static Long convertDateToTimestamp(Date dateToConvert) {
+    public static String convertDateToTimestamp(LocalDate dateToConvert) {
         if (dateToConvert == null) {
             return null;
         } else {
-            return dateToConvert.getTime();
+            return dateToConvert.toString();
         }
     }
 }

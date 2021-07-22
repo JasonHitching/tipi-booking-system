@@ -124,7 +124,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             bookingTextView = itemView.findViewById(R.id.structure_type_text);
             customerTextView = itemView.findViewById(R.id.customer_text);
             dateStartTextView = itemView.findViewById(R.id.start_date_text);
-            dateEndTextView = itemView.findViewById(R.id.end_date_text);
             customerAddText = itemView.findViewById(R.id.customer_add_text);
 
             binButton = itemView.findViewById(R.id.bin_button);
@@ -135,13 +134,16 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
          * @param booking booking object passed when a ViewHolder binds
          */
         public void setRowData(Booking booking) {
-
             // Set the text of all required views
             bookingTextView.setText(booking.getStructureType());
             customerTextView.setText("Customer name: " + booking.getCustomerFirstName() +
                     " " + booking.getCustomerLastName());
             customerAddText.setText("Address: " + booking.getCustomerAddress());
-            dateStartTextView.setText(booking.getBookingStartDate().toString());
+            dateStartTextView.setText("Date: " + booking.getBookingStartDate().getDayOfMonth()
+                            + " - " + booking.getBookingStartDate().getMonth()
+                            + " - " + booking.getBookingStartDate().getYear());
+
+
         }
     }
 
