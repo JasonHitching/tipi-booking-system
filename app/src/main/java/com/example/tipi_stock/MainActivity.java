@@ -6,6 +6,8 @@ import com.example.tipi_stock.databinding.ActivityMainBinding;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.example.tipi_stock.ui.bookings.booking.BookingAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private SharedBookingViewModel bookingViewModel;
     private static BookingAdapter bookingAdapter;
 
+    private FirebaseAuth firebaseAuthenticator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
+        firebaseAuthenticator = FirebaseAuth.getInstance();
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.home_nav, R.id.booking_nav, R.id.inventory_nav, R.id.logout_nav)
                 .build();
@@ -40,7 +46,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser anyoneLogged = firebaseAuthenticator.getCurrentUser();
+
+        if (anyoneLogged != null) {
+            // Do something
+        }
+    }
 }
