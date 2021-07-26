@@ -75,39 +75,44 @@ public class SharedBookingViewModel extends AndroidViewModel {
     public String createBooking(String structType, String firstName, String lastName, String address,
                                 String cost, LocalDate startDate, String noOfDays) {
 
-        double costVal = 0.0;
-        int numOfDays = 0;
+        double costVal = Double.parseDouble(cost);
+        int numOfDays = Integer.parseInt(noOfDays);
 
         LocalDate todaysDate = LocalDate.now();
-
-        // Try-catch to prevent program crash if an attempt is made to convert non integer/double
-        try {
-            costVal = Double.parseDouble(cost);
-            numOfDays = Integer.parseInt(noOfDays);
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Check existing bookings to see if they match desired booking
-        for (Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
-            if (booking.getBookingStartDate().equals(startDate)
-                    && structType.equals(booking.getStructureType())) {
-                return "Identical booking already exists then";
-            }
-        }
 
         // Check that the start date hasn't already passed
         if (startDate.isBefore(todaysDate)) {
             return "Booking date entered is in the past";
-        } else if (startDate.getYear() > 2021) {
-            return "Only bookings accepted for this year";
+        } else if (startDate.getYear() > LocalDate.now().getDayOfYear() + 2) {
+            return String.format("Only bookings accepted for %d and %d",
+                    LocalDate.now().getYear(), LocalDate.now().getYear() + 1);
             // Check that the start date hasn't already passed
         } else if (startDate.isBefore(todaysDate)) {
             return "Booking date entered is in the past";
+        } else if (checkExisting(startDate, structType)) {
+            return "Identical booking exists on that date";
         } else {
             Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
             roomRepo.insertBooking(newBooking);
         }
         return "success";
+    }
+
+    /**
+     * Function for checking whether an identical booking exists.
+     *
+     * @param startDate
+     * @param structureName
+     * @return
+     */
+    public boolean checkExisting(LocalDate startDate, String structureName) {
+        // Check existing bookings to see if they match desired booking
+        for (Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
+            if (booking.getBookingStartDate().equals(startDate)
+                    && structureName.equals(booking.getStructureType())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

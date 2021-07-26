@@ -37,7 +37,7 @@ import java.util.Objects;
  * to achieve some of the required functionality for this class:
  *     https://developer.android.com/reference/androidx/fragment/app/Fragment
  */
-public class BookingFormFragment extends DialogFragment {
+public class BookingFormFragment extends Fragment {
 
     private View rootView;
     private MaterialDatePicker bookingDateSelector;

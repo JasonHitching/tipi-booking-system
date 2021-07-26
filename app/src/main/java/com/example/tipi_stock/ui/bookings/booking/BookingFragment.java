@@ -70,11 +70,8 @@ public class BookingFragment extends Fragment {
         FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
 
         newBookingFab.setOnClickListener(thisView -> {
-            BookingFormFragment bookingFormFragment = new BookingFormFragment();
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            fragmentTransaction.add(android.R.id.content, bookingFormFragment)
-                    .addToBackStack(null).commit();
+            NavHostFragment.findNavController(this).navigate(
+                    R.id.action_booking_nav_to_bookingFormFragment);
         });
 
         Button sortButton = rootView.findViewById(R.id.button9);
