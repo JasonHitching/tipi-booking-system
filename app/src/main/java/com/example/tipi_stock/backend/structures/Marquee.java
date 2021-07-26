@@ -113,7 +113,7 @@ public class Marquee {
 
     /**
      * Override 'hashCode' for consistent storage in Hash date structures
-     * 
+     *
      * @return hash of all object properties
      */
     @Override
