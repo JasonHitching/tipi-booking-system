@@ -65,12 +65,12 @@ public class SharedBookingViewModel extends AndroidViewModel {
      * into the relevant booking Room database.
      *
      * @param structType Type of structure for the booking
-     * @param firstName Customers first name
-     * @param lastName Customers surname
-     * @param address Customers address
-     * @param cost Total booking cost
-     * @param startDate Date that the booking starts
-     * @param noOfDays Number of days the structure will be booked for
+     * @param firstName  Customers first name
+     * @param lastName   Customers surname
+     * @param address    Customers address
+     * @param cost       Total booking cost
+     * @param startDate  Date that the booking starts
+     * @param noOfDays   Number of days the structure will be booked for
      */
     public String createBooking(String structType, String firstName, String lastName, String address,
                                 String cost, LocalDate startDate, String noOfDays) {
@@ -89,8 +89,8 @@ public class SharedBookingViewModel extends AndroidViewModel {
         }
 
         // Check existing bookings to see if they match desired booking
-        for(Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
-            if(booking.getBookingStartDate().equals(startDate)
+        for (Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
+            if (booking.getBookingStartDate().equals(startDate)
                     && structType.equals(booking.getStructureType())) {
                 return "Identical booking already exists then";
             }
@@ -101,11 +101,13 @@ public class SharedBookingViewModel extends AndroidViewModel {
             return "Booking date entered is in the past";
         } else if (startDate.getYear() > 2021) {
             return "Only bookings accepted for this year";
+            // Check that the start date hasn't already passed
+        } else if (startDate.isBefore(todaysDate)) {
+            return "Booking date entered is in the past";
         } else {
             Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
             roomRepo.insertBooking(newBooking);
         }
         return "success";
     }
-
 }
