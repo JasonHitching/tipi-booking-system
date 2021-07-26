@@ -3,11 +3,14 @@ package com.example.tipi_stock.ui.bookings.booking;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Button;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
+import com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -45,6 +49,7 @@ public class BookingFragment extends Fragment {
                              @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.booking_fragment, null);
+        sharedBookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
 
         return rootView;
     }
@@ -56,7 +61,6 @@ public class BookingFragment extends Fragment {
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        sharedBookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
 
         // Add a live data observer
         sharedBookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
@@ -64,8 +68,11 @@ public class BookingFragment extends Fragment {
         FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
 
         newBookingFab.setOnClickListener(thisView -> {
-            NavHostFragment.findNavController(this).navigate(
-                    R.id.action_booking_nav_to_bookingFormFragment);
+            BookingFormFragment bookingFormFragment = new BookingFormFragment();
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            fragmentTransaction.add(android.R.id.content, bookingFormFragment)
+                    .addToBackStack(null).commit();
         });
 
         Button sortButton = rootView.findViewById(R.id.button9);

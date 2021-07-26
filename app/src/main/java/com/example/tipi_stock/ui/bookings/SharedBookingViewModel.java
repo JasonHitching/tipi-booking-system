@@ -108,13 +108,13 @@ public class SharedBookingViewModel extends AndroidViewModel {
             roomRepo.insertBooking(newBooking);
         }
 
-        // Check existing bookings to see if they match desired booking
-        for(Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
-            if(booking.getBookingStartDate().equals(startDate)
-                    && structType.equals(booking.getStructureType())) {
-                return "Identical booking already exists then";
-            }
-        }
+//        // Check existing bookings to see if they match desired booking
+//        for(Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
+//            if(booking.getBookingStartDate().equals(startDate)
+//                    && structType.equals(booking.getStructureType())) {
+//                return "Identical booking already exists then";
+//            }
+//        }
         return "success";
     }
 

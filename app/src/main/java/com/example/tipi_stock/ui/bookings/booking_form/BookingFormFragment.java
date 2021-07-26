@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -36,7 +37,7 @@ import java.util.Objects;
  * to achieve some of the required functionality for this class:
  *     https://developer.android.com/reference/androidx/fragment/app/Fragment
  */
-public class BookingFormFragment extends Fragment {
+public class BookingFormFragment extends DialogFragment {
 
     private View rootView;
     private MaterialDatePicker bookingDateSelector;
