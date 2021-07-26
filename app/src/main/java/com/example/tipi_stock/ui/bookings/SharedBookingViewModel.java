@@ -40,18 +40,6 @@ public class SharedBookingViewModel extends AndroidViewModel {
     public LiveData<List<Booking>> getAllBookings() {
         return currentBookings;
     }
-//
-//    public void insert(Booking newBooking) {
-//        roomRepo.insert(newBooking);
-//    }
-//
-//    public void deleteAll() {
-//        roomRepo.deleteAll();
-//    }
-//
-//    public void deleteWord(Booking discardedBooking) {
-//        roomRepo.deleteWord(discardedBooking);
-//    }
 
     public void sortNewestFirst() {
         // obtain booking list size for the loop iterations
@@ -100,20 +88,22 @@ public class SharedBookingViewModel extends AndroidViewModel {
             System.out.println(e.getMessage());
         }
 
-        // Check that the start date hasn't already passed
-        if (startDate.isBefore(todaysDate)) {
-            return "Booking date entered is in the past";
-        } else {
-            Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
-            roomRepo.insertBooking(newBooking);
-        }
-
         // Check existing bookings to see if they match desired booking
         for(Booking booking : Objects.requireNonNull(currentBookings.getValue())) {
             if(booking.getBookingStartDate().equals(startDate)
                     && structType.equals(booking.getStructureType())) {
                 return "Identical booking already exists then";
             }
+        }
+
+        // Check that the start date hasn't already passed
+        if (startDate.isBefore(todaysDate)) {
+            return "Booking date entered is in the past";
+        } else if (startDate.getYear() > 2021) {
+            return "Only bookings accepted for this year";
+        } else {
+            Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
+            roomRepo.insertBooking(newBooking);
         }
         return "success";
     }

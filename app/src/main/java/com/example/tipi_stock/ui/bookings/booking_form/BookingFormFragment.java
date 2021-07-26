@@ -77,7 +77,7 @@ public class BookingFormFragment extends Fragment {
         calendarButton = rootView.findViewById(R.id.calander_button);
 
         // Reference the shared view model for both BookingFormFragment and BookingForm
-        bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
+        bookingViewModel = new ViewModelProvider(requireActivity()).get(SharedBookingViewModel.class);
 
         return rootView;
     }
@@ -108,7 +108,7 @@ public class BookingFormFragment extends Fragment {
                     + firstLineAddress.getText().toString() + " - "
                     + postcode.getText().toString();
 
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
             String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
 
             String result = bookingViewModel.createBooking(

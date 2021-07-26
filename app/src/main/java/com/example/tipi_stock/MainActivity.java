@@ -3,9 +3,12 @@ package com.example.tipi_stock;
 import android.os.Bundle;
 
 import com.example.tipi_stock.databinding.ActivityMainBinding;
+import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
+import com.example.tipi_stock.ui.bookings.booking.BookingAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -14,6 +17,11 @@ import androidx.navigation.ui.NavigationUI;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    // ViewModel available to all fragments hosted by this main activity.
+    private SharedBookingViewModel bookingViewModel;
+    private static BookingAdapter bookingAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
+
     }
 
 }

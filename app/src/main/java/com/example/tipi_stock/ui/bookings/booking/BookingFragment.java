@@ -56,7 +56,7 @@ public class BookingFragment extends Fragment {
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        sharedBookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
+        sharedBookingViewModel = new ViewModelProvider(requireActivity()).get(SharedBookingViewModel.class);
 
         // Add a live data observer
         sharedBookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
