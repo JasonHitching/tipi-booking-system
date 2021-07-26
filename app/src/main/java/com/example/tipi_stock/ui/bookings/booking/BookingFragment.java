@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
@@ -65,6 +66,12 @@ public class BookingFragment extends Fragment {
         newBookingFab.setOnClickListener(thisView -> {
             NavHostFragment.findNavController(this).navigate(
                     R.id.action_booking_nav_to_bookingFormFragment);
+        });
+
+        Button sortButton = rootView.findViewById(R.id.button9);
+
+        sortButton.setOnClickListener(view5 -> {
+            sharedBookingViewModel.sortNewestFirst();
         });
 
     }

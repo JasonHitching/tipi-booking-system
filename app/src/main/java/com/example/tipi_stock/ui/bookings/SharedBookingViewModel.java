@@ -2,13 +2,16 @@ package com.example.tipi_stock.ui.bookings;
 
 import android.app.Application;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.tipi_stock.backend.bookings.data.Booking;
 import com.example.tipi_stock.backend.bookings.data.BookingRepository;
+import com.example.tipi_stock.ui.bookings.booking.BookingAdapter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,9 +53,22 @@ public class SharedBookingViewModel extends AndroidViewModel {
 //    }
 
     public void sortNewestFirst() {
-        for (int i = 0; i < currentBookings.getValue().size(); i++) {
+        // obtain booking list size for the loop iterations
+        int bookingsSize = currentBookings.getValue().size();
 
+        for (int i = 0; i < bookingsSize - 1; i++) {
+            for (int j = 0; j < bookingsSize - i - 1; j++) {
+                LocalDate startDate1 = currentBookings.getValue().get(j).getBookingStartDate();
+                LocalDate startDate2 = currentBookings.getValue().get(j + 1).getBookingStartDate();
+                if (startDate1.isAfter(startDate2)) {
+                    Booking tempBooking = currentBookings.getValue().get(j);
+                    // Replace positions
+                    currentBookings.getValue().set(j, currentBookings.getValue().get(j + 1));
+                    currentBookings.getValue().set(j + 1, tempBooking);
+                }
+            }
         }
+        currentBookings.getValue().get(0).customerFirstName = "";
     }
 
     /**
@@ -84,7 +100,6 @@ public class SharedBookingViewModel extends AndroidViewModel {
         }
 
         if (startDate.isBefore(todaysDate)) {
-            System.out.println("nah");
             return "Booking date entered is in the past";
         } else {
             Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);

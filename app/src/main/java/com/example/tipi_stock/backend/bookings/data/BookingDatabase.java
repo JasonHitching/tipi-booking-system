@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Booking.class}, version = 5, exportSchema = true)
+@Database(entities = {Booking.class}, version = 7, exportSchema = true)
 @TypeConverters({DateConverter.class})
 public abstract class BookingDatabase extends RoomDatabase {
 
@@ -71,13 +71,13 @@ public abstract class BookingDatabase extends RoomDatabase {
             Booking tipiBooking = new Booking( "Tipi",
                     "Jason", "Hitching",
                     "76 Inway Drive KL25TP", 233,
-                    LocalDate.of(2021, 8, 1), 10);
+                    LocalDate.of(2021, 6, 3), 10);
             dao.insertBooking(tipiBooking);
 
             Booking marqueeBooking = new Booking( "Marquee",
                     "Daniel", "Rose",
                     "26 Flyway Drive TY5YYH",500,
-                    LocalDate.of(2021, 8, 1), 2);
+                    LocalDate.of(2022, 1, 22), 2);
             dao.insertBooking(marqueeBooking);
 
         });

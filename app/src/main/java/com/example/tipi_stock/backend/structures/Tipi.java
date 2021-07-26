@@ -17,11 +17,11 @@ public class Tipi {
     private final String[] components;
 
     public Tipi() {
-        components = new String[]{"Canvas", "8m Legs", "Ground Stakes", "Fairy Lights",
+        components = new String[]{"Canvas", "8m Legs", "Large Ground Stakes", "Fairy Lights",
                 "Chandelier", "Carpet Flooring", "Blanking Panels"};
         legQuantity = 8;
-        mediumGroundStakeQuantity = 10;
-        largeGroundStakeQuantity= 8;
+        mediumGroundStakeQuantity = 20;
+        largeGroundStakeQuantity= 15;
         fairyLightQuantity = 5;
         clevisPinsQuantity = 20;
     }

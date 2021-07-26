@@ -2,6 +2,7 @@ package com.example.tipi_stock.backend.bookings.data;
 
 
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -49,6 +50,10 @@ public class Booking {
         return structureType;
     }
 
+    public void setCustomerAddress(String change) {
+        customerAddress = customerAddress + change;
+    }
+
     public String getCustomerFirstName() {
         return customerFirstName;
     }
@@ -69,5 +74,11 @@ public class Booking {
 
     public int getNumberOfDays() {
         return numberOfDays;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return bookingStartDate.toString();
     }
 }
