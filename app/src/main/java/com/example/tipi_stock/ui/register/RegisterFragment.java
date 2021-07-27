@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +71,8 @@ public class RegisterFragment extends Fragment {
                     // Authentication was successful
                     if (signupTask.isSuccessful()) {
                         FirebaseUser user = authenticator.getCurrentUser();
-                        // Update user interface here
+                        NavHostFragment.findNavController(this).navigate(
+                                R.id.action_registerFragment_to_loginFragment);
                     } else {
                         // Authentication failed with the firebase DB
                         Toast.makeText(getActivity(), "Authentication failed!",

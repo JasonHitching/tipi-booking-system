@@ -1,6 +1,7 @@
 package com.example.tipi_stock;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.tipi_stock.databinding.ActivityMainBinding;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
@@ -9,9 +10,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -23,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     // ViewModel available to all fragments hosted by this main activity.
     private SharedBookingViewModel bookingViewModel;
     private static BookingAdapter bookingAdapter;
-
+    BottomNavigationView navView;
     private FirebaseAuth firebaseAuthenticator;
 
 
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
 
         firebaseAuthenticator = FirebaseAuth.getInstance();
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -55,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (anyoneLogged != null) {
             // Do something
+        }
+    }
+
+    public void hideNavigation(boolean hide) {
+        if (hide == true) {
+            navView.setVisibility(View.GONE);
+        } else {
+            navView.setVisibility(View.VISIBLE);
         }
     }
 }

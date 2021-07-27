@@ -20,6 +20,7 @@ import android.widget.Button;
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
@@ -62,6 +63,7 @@ public class BookingFragment extends Fragment {
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         sharedBookingViewModel = new ViewModelProvider(requireActivity()).get(SharedBookingViewModel.class);
+
 
 
         // Add a live data observer
