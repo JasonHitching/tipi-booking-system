@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/booking_nav">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/booking_nav"
@@ -23,7 +23,11 @@
         android:id="@+id/loginFragment"
         android:name="com.example.tipi_stock.ui.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/login_fragment"/>
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookingFormFragment"
         android:name="com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment"
@@ -32,4 +36,9 @@
             android:id="@+id/action_bookingFormFragment_to_booking_nav"
             app:destination="@id/booking_nav" />
     </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.tipi_stock.ui.register.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/register_fragment" />
 </navigation>

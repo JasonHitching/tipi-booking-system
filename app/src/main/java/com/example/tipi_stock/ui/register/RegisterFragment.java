@@ -49,10 +49,11 @@ public class RegisterFragment extends Fragment {
         passwordTextInput = rootView.findViewById(R.id.password_text_field);
 
         authenticator = FirebaseAuth.getInstance();
-        String emailText = emailTextInput.getEditText().getText().toString();
-        String passwordText = passwordTextInput.getEditText().getText().toString();
+
         registerButton.setOnClickListener( registerButton -> {
-                createNewAccount(emailText, passwordText);
+            String emailText = emailTextInput.getEditText().getText().toString();
+            String passwordText = passwordTextInput.getEditText().getText().toString();
+            createNewAccount(emailText, passwordText);
         });
 
     }
