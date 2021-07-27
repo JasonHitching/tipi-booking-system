@@ -61,8 +61,6 @@ public class LoginFragment extends Fragment {
         emailTextLayout = rootView.findViewById(R.id.login_email_text);
         passwordTextLayout = rootView.findViewById(R.id.password_text_field);
 
-
-
         // On click listener for the register button
         registerButton.setOnClickListener(registerView -> {
             NavHostFragment.findNavController(this).navigate(
@@ -104,7 +102,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.hideNavigation(true);
@@ -114,7 +111,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
             mainActivity.hideNavigation(false);

@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     private FirebaseAuth firebaseAuthenticator;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,21 +51,13 @@ public class MainActivity extends AppCompatActivity {
         bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser anyoneLogged = firebaseAuthenticator.getCurrentUser();
-
-        if (anyoneLogged != null) {
-            // Do something
-        }
-    }
-
+    // Function for hiding bottom navigation when required
     public void hideNavigation(boolean hide) {
         if (hide == true) {
+            this.getSupportActionBar().hide();
             navView.setVisibility(View.GONE);
         } else {
+            this.getSupportActionBar().show();
             navView.setVisibility(View.VISIBLE);
         }
     }
