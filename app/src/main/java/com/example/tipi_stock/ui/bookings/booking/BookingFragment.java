@@ -2,6 +2,7 @@ package com.example.tipi_stock.ui.bookings.booking;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -35,7 +36,7 @@ public class BookingFragment extends Fragment {
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
     private SharedBookingViewModel sharedBookingViewModel;
-
+    private Button sortButton;
     private View rootView;
 
     // Required empty constructor
@@ -51,6 +52,9 @@ public class BookingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.booking_fragment, null);
         sharedBookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
+
+        // Hide default action bar for this fragment
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         return rootView;
     }
@@ -76,11 +80,12 @@ public class BookingFragment extends Fragment {
                     R.id.action_booking_nav_to_bookingFormFragment);
         });
 
-        Button sortButton = rootView.findViewById(R.id.button9);
+     //   sortButton = rootView.findViewById(R.id.button9);
 
-        sortButton.setOnClickListener(view5 -> {
-            sharedBookingViewModel.sortNewestFirst();
-        });
+//        sortButton.setOnClickListener(view5 -> {
+//            sharedBookingViewModel.sortNewestFirst();
+//            bookingAdapter.notifyDataSetChanged();
+//        });
 
     }
 

@@ -31,6 +31,7 @@ public class SharedBookingViewModel extends AndroidViewModel {
     // Current live data of the Booking entities stored in the Room database
     private LiveData<List<Booking>> currentBookings;
 
+
     public SharedBookingViewModel(Application app) {
         super(app);
         roomRepo = new BookingRepository(app);
@@ -83,13 +84,15 @@ public class SharedBookingViewModel extends AndroidViewModel {
         // Check that the start date hasn't already passed
         if (startDate.isBefore(todaysDate)) {
             return "Booking date entered is in the past";
-        } else if (startDate.getYear() > LocalDate.now().getDayOfYear() + 2) {
-            return String.format("Only bookings accepted for %d and %d",
-                    LocalDate.now().getYear(), LocalDate.now().getYear() + 1);
-            // Check that the start date hasn't already passed
-        } else if (startDate.isBefore(todaysDate)) {
-            return "Booking date entered is in the past";
-        } else if (checkExisting(startDate, structType)) {
+        }
+//        } else if (startDate.getYear() > LocalDate.now().getDayOfYear() + 2) {
+//            return String.format("Only bookings accepted for %d and %d",
+//                    LocalDate.now().getYear(), LocalDate.now().getYear() + 1);
+//            // Check that the start date hasn't already passed
+//        } else if (startDate.isBefore(todaysDate)) {
+        //    return "Booking date entered is in the past";
+      //  }
+        else if (checkExisting(startDate, structType)) {
             return "Identical booking exists on that date";
         } else {
             Booking newBooking = new Booking(structType, firstName, lastName, address, costVal, startDate, numOfDays);
