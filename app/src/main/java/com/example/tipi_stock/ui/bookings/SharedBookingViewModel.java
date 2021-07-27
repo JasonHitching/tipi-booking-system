@@ -42,7 +42,10 @@ public class SharedBookingViewModel extends AndroidViewModel {
         return currentBookings;
     }
 
-    public void sortNewestFirst() {
+    /**
+     * Sort recycler view cards by date in ascending order
+     */
+    public void sortDateAscending() {
         // obtain booking list size for the loop iterations
         int bookingsSize = currentBookings.getValue().size();
 
@@ -51,6 +54,28 @@ public class SharedBookingViewModel extends AndroidViewModel {
                 LocalDate startDate1 = currentBookings.getValue().get(j).getBookingStartDate();
                 LocalDate startDate2 = currentBookings.getValue().get(j + 1).getBookingStartDate();
                 if (startDate1.isAfter(startDate2)) {
+                    Booking tempBooking = currentBookings.getValue().get(j);
+                    // Replace positions
+                    currentBookings.getValue().set(j, currentBookings.getValue().get(j + 1));
+                    currentBookings.getValue().set(j + 1, tempBooking);
+                }
+            }
+        }
+        currentBookings.getValue().get(0).customerFirstName = "";
+    }
+
+    /**
+     * Sort the recycler view cards by date in descending order
+     */
+    public void sortDateDescending() {
+        // obtain booking list size for the loop iterations
+        int bookingsSize = currentBookings.getValue().size();
+
+        for (int i = 0; i < bookingsSize - 1; i++) {
+            for (int j = 0; j < bookingsSize - i - 1; j++) {
+                LocalDate startDate1 = currentBookings.getValue().get(j).getBookingStartDate();
+                LocalDate startDate2 = currentBookings.getValue().get(j + 1).getBookingStartDate();
+                if (startDate2.isAfter(startDate1)) {
                     Booking tempBooking = currentBookings.getValue().get(j);
                     // Replace positions
                     currentBookings.getValue().set(j, currentBookings.getValue().get(j + 1));

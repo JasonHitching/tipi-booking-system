@@ -10,7 +10,7 @@
         android:id="@+id/tipi_card_view"
         android:layout_width="380dp"
         android:layout_height="150dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         app:cardBackgroundColor="#264653"
         app:cardCornerRadius="15dp"
 
@@ -90,7 +90,6 @@
         android:id="@+id/marquee_card_view"
         android:layout_width="380dp"
         android:layout_height="150dp"
-        android:layout_marginTop="25dp"
         app:cardBackgroundColor="#264653"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -188,7 +187,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="serif-monospace"
         android:lineSpacingExtra="20sp"
         android:text="Structure Information"
@@ -199,7 +198,10 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toTopOf="@+id/tipi_card_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

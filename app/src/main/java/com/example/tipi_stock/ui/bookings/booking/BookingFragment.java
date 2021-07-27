@@ -3,6 +3,7 @@ package com.example.tipi_stock.ui.bookings.booking;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -14,15 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Objects;
 
 /**
  * Booking fragment displays the booking recycler and existing bookings from the Room database
@@ -38,6 +46,7 @@ public class BookingFragment extends Fragment {
     private SharedBookingViewModel sharedBookingViewModel;
     private Button sortButton;
     private View rootView;
+    private MaterialToolbar topBar;
 
     // Required empty constructor
     public BookingFragment() {
@@ -62,6 +71,7 @@ public class BookingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         bookingRecycler = rootView.findViewById(R.id.booking_recycler);
+        topBar = rootView.findViewById(R.id.top_app_bar);
         bookingAdapter = new BookingAdapter(getActivity());
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
@@ -80,13 +90,24 @@ public class BookingFragment extends Fragment {
                     R.id.action_booking_nav_to_bookingFormFragment);
         });
 
-     //   sortButton = rootView.findViewById(R.id.button9);
-
-//        sortButton.setOnClickListener(view5 -> {
-//            sharedBookingViewModel.sortNewestFirst();
-//            bookingAdapter.notifyDataSetChanged();
-//        });
-
+        // Set on click listener for handling toolbar menu clicks
+        topBar.setOnMenuItemClickListener(clickedItem -> {
+            switch (clickedItem.getItemId()) {
+                case R.id.ascending_item:
+                    sharedBookingViewModel.sortDateAscending();
+                    bookingAdapter.notifyDataSetChanged();
+                    Toast.makeText(getActivity(), "Bookings sorted date ascending!",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.descending_item:
+                    sharedBookingViewModel.sortDateDescending();
+                    bookingAdapter.notifyDataSetChanged();
+                    Toast.makeText(getActivity(), "Bookings sorted date descending!",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(clickedItem);
+            }
+        });
     }
-
 }
