@@ -26,7 +26,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/aref_ruqaa_bold"
         android:text="Tipi Manager"
-        android:textColor="#FFAB91"
+        android:textColor="#0E0D0D"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
