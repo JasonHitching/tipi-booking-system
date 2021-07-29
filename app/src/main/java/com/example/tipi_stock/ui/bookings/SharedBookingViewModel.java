@@ -42,6 +42,10 @@ public class SharedBookingViewModel extends AndroidViewModel {
         return currentBookings;
     }
 
+    public Booking getBooking(int pos) {
+        return currentBookings.getValue().get(pos);
+    }
+
     /**
      * Sort recycler view cards by date in ascending order
      */
@@ -142,5 +146,9 @@ public class SharedBookingViewModel extends AndroidViewModel {
             }
         }
         return false;
+    }
+
+    public void updateBooking(Booking booking) {
+        roomRepo.updateBooking(booking);
     }
 }

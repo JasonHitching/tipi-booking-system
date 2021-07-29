@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -34,4 +35,7 @@ public interface BookingDao {
      */
     @Query("DELETE FROM booking_table")
     void deleteAllBookings();
+
+    @Update(entity = Booking.class)
+    public  void updateBooking(Booking booking);
 }

@@ -50,6 +50,10 @@ public class Booking {
         return structureType;
     }
 
+    public void setStructureType(String struct) {
+        structureType = struct;
+    }
+
     public void setCustomerAddress(String change) {
         customerAddress = customerAddress + change;
     }

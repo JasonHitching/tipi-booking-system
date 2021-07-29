@@ -61,5 +61,9 @@
     <fragment
         android:id="@+id/bookingEditFragment"
         android:name="com.example.tipi_stock.ui.bookings.booking_forms.BookingEditFragment"
-        android:label="BookingEditFragment" />
+        android:label="BookingEditFragment" >
+        <argument
+            android:name="adapterPosition"
+            app:argType="integer" />
+    </fragment>
 </navigation>

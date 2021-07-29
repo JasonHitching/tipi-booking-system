@@ -29,5 +29,10 @@ public class BookingRepository {
      */
     public void insertBooking(Booking newBooking) {
         BookingDatabase.databaseExecutor.execute(() -> bookingDao.insertBooking(newBooking));
-        }
+    }
+
+    public void updateBooking(Booking updatedBooking) {
+        BookingDatabase.databaseExecutor.execute(() -> bookingDao.updateBooking(updatedBooking));
+
+    }
 }

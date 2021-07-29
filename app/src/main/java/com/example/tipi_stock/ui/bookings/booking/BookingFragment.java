@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Booking fragment displays the booking recycler and existing bookings from the Room database
@@ -106,7 +109,10 @@ public class BookingFragment extends Fragment implements BookingAdapter.OnBookin
      */
     @Override
     public void onBookingClicked(int position) {
+        Log.d(TAG, "onBookingClicked: " + position);
+        Bundle posBundle = new Bundle();
+        posBundle.putInt("position", position);
         NavHostFragment.findNavController(this).navigate(
-                R.id.action_booking_nav_to_bookingEditFragment2);
+                R.id.action_booking_nav_to_bookingEditFragment2, posBundle);
     }
 }
