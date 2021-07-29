@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/booking_nav">
 
     <fragment
         android:id="@+id/booking_nav"
@@ -15,6 +15,14 @@
             app:destination="@id/bookingFormFragment"
             app:enterAnim="@animator/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"/>
+        <action
+            android:id="@+id/action_booking_nav_to_bookingEditFragment2"
+            app:destination="@id/bookingEditFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/booking_nav"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/inventory_nav"
@@ -35,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/bookingFormFragment"
-        android:name="com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment"
+        android:name="com.example.tipi_stock.ui.bookings.booking_forms.BookingFormFragment"
         android:label="BookingFormFragment" >
         <action
             android:id="@+id/action_bookingFormFragment_to_booking_nav"
@@ -50,4 +58,8 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bookingEditFragment"
+        android:name="com.example.tipi_stock.ui.bookings.booking_forms.BookingEditFragment"
+        android:label="BookingEditFragment" />
 </navigation>

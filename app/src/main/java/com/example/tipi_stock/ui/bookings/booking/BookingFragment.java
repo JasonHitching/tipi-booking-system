@@ -3,21 +3,14 @@ package com.example.tipi_stock.ui.bookings.booking;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,12 +18,8 @@ import android.widget.Toast;
 
 import com.example.tipi_stock.R;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
-import com.example.tipi_stock.ui.bookings.booking_form.BookingFormFragment;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.Objects;
 
 /**
  * Booking fragment displays the booking recycler and existing bookings from the Room database
@@ -39,7 +28,7 @@ import java.util.Objects;
  * to achieve some of the required functionality for this class:
  *      https://developer.android.com/reference/androidx/fragment/app/Fragment
  */
-public class BookingFragment extends Fragment {
+public class BookingFragment extends Fragment implements BookingAdapter.OnBookingClickListener {
 
     private static BookingAdapter bookingAdapter;
     private static RecyclerView bookingRecycler;
@@ -72,7 +61,7 @@ public class BookingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         bookingRecycler = rootView.findViewById(R.id.booking_recycler);
         topBar = rootView.findViewById(R.id.top_app_bar);
-        bookingAdapter = new BookingAdapter(getActivity());
+        bookingAdapter = new BookingAdapter(getActivity(), this);
         bookingRecycler.setHasFixedSize(true);
         bookingRecycler.setAdapter(bookingAdapter);
         bookingRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -109,5 +98,15 @@ public class BookingFragment extends Fragment {
                     return super.onOptionsItemSelected(clickedItem);
             }
         });
+    }
+
+    /**
+     *
+     * @param position
+     */
+    @Override
+    public void onBookingClicked(int position) {
+        NavHostFragment.findNavController(this).navigate(
+                R.id.action_booking_nav_to_bookingEditFragment2);
     }
 }

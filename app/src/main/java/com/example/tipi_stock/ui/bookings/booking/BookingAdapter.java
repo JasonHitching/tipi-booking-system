@@ -30,10 +30,12 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
 
     private List<Booking> bookingData;
     private LayoutInflater layoutInflater;
+    private OnBookingClickListener onBookingClickListener;
 
-    public BookingAdapter(Context context) {
+    public BookingAdapter(Context context, OnBookingClickListener onBookingClickListener) {
         // Create a layout inflater from the instantiating fragments context
         layoutInflater = LayoutInflater.from(context);
+        this.onBookingClickListener = onBookingClickListener;
     }
 
     /**
@@ -48,7 +50,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = layoutInflater.inflate(
                 R.layout.booking_card_view, parent, false);
-        ViewHolder holder = new ViewHolder(itemView);
+        ViewHolder holder = new ViewHolder(itemView, onBookingClickListener );
         return holder;
     }
 
@@ -108,7 +110,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
      *
      * https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnBookingClickListener bookingsClickListener;
 
         TextView bookingTextView, customerTextView, customerAddText, dateStartTextView, dateEndTextView;
         ImageButton binButton, modifyButton;
@@ -117,7 +120,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
          * ViewHolder constructor
          * @param itemView individual row item view
          */
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnBookingClickListener onBookingClickListener) {
             super(itemView);
 
             // Obtain the required view from recycler_row.xml
@@ -125,8 +128,14 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
             customerTextView = itemView.findViewById(R.id.customer_text);
             dateStartTextView = itemView.findViewById(R.id.start_date_text);
             customerAddText = itemView.findViewById(R.id.customer_add_text);
-
+            bookingsClickListener = onBookingClickListener;
             binButton = itemView.findViewById(R.id.bin_button);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            bookingsClickListener.onBookingClicked(getAbsoluteAdapterPosition());
         }
 
         /**
@@ -147,6 +156,11 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         }
     }
 
-
+    /**
+     * Interface to send item clicked psoition to fragment
+     */
+    public interface OnBookingClickListener {
+        void onBookingClicked(int position);
+    }
 
 }
