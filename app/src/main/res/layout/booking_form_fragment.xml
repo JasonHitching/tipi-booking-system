@@ -149,46 +149,14 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="380dp"
             android:layout_height="60dp"
-            android:hint="First line of address">
+            android:hint="Customer address">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/address_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="185dp"
-                android:layout_height="match_parent"
-                android:hint="House number">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/house_number_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="185dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/postcode_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Postcode" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
     </LinearLayout>
 
     <Button

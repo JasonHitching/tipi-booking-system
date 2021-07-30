@@ -48,6 +48,7 @@ public class BookingFormFragment extends Fragment {
     private SharedBookingViewModel bookingViewModel;
     private Button submitButton;
     private String editAddFlag;
+    Booking selectedBooking;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -88,11 +89,51 @@ public class BookingFormFragment extends Fragment {
     public void onViewCreated(@NonNull View view,
                               @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         editAddFlag = getArguments().get("type").toString();
+
+        // If currently the edit flag is in 'edit' mode
         if (editAddFlag.equals("edit")) {
-            Log.d(TAG, "onViewCreated: edit booking mode");
             editFormData(getArguments().getInt("position"));
+            submitButton.setOnClickListener(view1 -> {
+                selectedBooking.setStructureType(structureText.getText().toString());
+                selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
+                selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
+                bookingViewModel.updateBooking(selectedBooking);
+                NavHostFragment.findNavController(this).popBackStack();
+            });
         } else {
             Log.d(TAG, "onViewCreated: new booking mode");
+            // On click listener monitoring the form submit button
+            submitButton.setOnClickListener(submit -> {
+                // Concatenate customer address values
+                String customerAddress = houseNumber.getText().toString() + " - "
+                        + firstLineAddress.getText().toString() + " - "
+                        + postcode.getText().toString();
+
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
+                String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
+
+                String result = bookingViewModel.createBooking(
+                        Objects.requireNonNull(structureText.getText()).toString(),
+                        Objects.requireNonNull(firstNameText.getText()).toString(),
+                        Objects.requireNonNull(lastNameText.getText()).toString(),
+                        customerAddress,
+                        Objects.requireNonNull(costText.getText()).toString(),
+                        LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
+                        Objects.requireNonNull(daysText.getText()).toString());
+
+                // If the booking wasn't a success, display a dialog window the the reason
+                if (!result.equals("success")) {
+                    // Obtain the view context to be used to display the dialog
+                    Context viewContext = view.getRootView().getContext();
+
+                    AlertDialog.Builder incorrectInput = new AlertDialog.Builder(viewContext);
+                    incorrectInput.setMessage(result);
+                    incorrectInput.setPositiveButton("Okay", (dialogInterface, i) -> {});
+                    incorrectInput.create().show();
+                } else {
+                    NavHostFragment.findNavController(this).popBackStack();
+                }
+            });
         }
 
         // Display MaterialDatePicker instance when image button clicked
@@ -108,42 +149,10 @@ public class BookingFormFragment extends Fragment {
             dateTextLayout.setHint("Selected date");
         });
 
-        // On click listener monitoring the form submit button
-        submitButton.setOnClickListener(submit -> {
-            // Concatenate customer address values
-            String customerAddress = houseNumber.getText().toString() + " - "
-                    + firstLineAddress.getText().toString() + " - "
-                    + postcode.getText().toString();
-
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
-            String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
-
-            String result = bookingViewModel.createBooking(
-                    Objects.requireNonNull(structureText.getText()).toString(),
-                    Objects.requireNonNull(firstNameText.getText()).toString(),
-                    Objects.requireNonNull(lastNameText.getText()).toString(),
-                    customerAddress,
-                    Objects.requireNonNull(costText.getText()).toString(),
-                    LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
-                    Objects.requireNonNull(daysText.getText()).toString());
-
-            // If the booking wasn't a success, display a dialog window the the reason
-            if (!result.equals("success")) {
-                // Obtain the view context to be used to display the dialog
-                Context viewContext = view.getRootView().getContext();
-
-                AlertDialog.Builder incorrectInput = new AlertDialog.Builder(viewContext);
-                incorrectInput.setMessage(result);
-                incorrectInput.setPositiveButton("Okay", (dialogInterface, i) -> {});
-                incorrectInput.create().show();
-            } else {
-                NavHostFragment.findNavController(this).popBackStack();
-            }
-        });
     }
 
     public void editFormData(int arrayPos) {
-        Booking selectedBooking = bookingViewModel.getBooking(arrayPos);
+        selectedBooking = bookingViewModel.getBooking(arrayPos);
         structureText.setText(selectedBooking.getStructureType());
         // dateText.setText(selectedBooking.getBookingStartDate().toString());
         costText.setText(String.valueOf(selectedBooking.getCost()));
@@ -151,12 +160,5 @@ public class BookingFormFragment extends Fragment {
         firstNameText.setText(selectedBooking.getCustomerFirstName());
         lastNameText.setText(selectedBooking.getCustomerLastName());
         firstLineAddress.setText(selectedBooking.getCustomerAddress());
-
-        submitButton.setOnClickListener(view1 -> {
-            selectedBooking.setStructureType(structureText.toString());
-            selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
-            selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
-            bookingViewModel.updateBooking(selectedBooking);
-        });
     }
 }
