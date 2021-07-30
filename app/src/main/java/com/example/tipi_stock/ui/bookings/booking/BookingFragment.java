@@ -39,9 +39,12 @@ public class BookingFragment extends Fragment implements BookingAdapter.OnBookin
     private Button sortButton;
     private View rootView;
     private MaterialToolbar topBar;
+    Bundle dataBundle;
+
 
     // Required empty constructor
     public BookingFragment() {
+        dataBundle = new Bundle();
     }
 
     @Nullable
@@ -78,8 +81,10 @@ public class BookingFragment extends Fragment implements BookingAdapter.OnBookin
         FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
 
         newBookingFab.setOnClickListener(thisView -> {
+            dataBundle.clear();
+            dataBundle.putString("type", "new");
             NavHostFragment.findNavController(this).navigate(
-                    R.id.action_booking_nav_to_bookingFormFragment);
+                    R.id.action_booking_nav_to_bookingFormFragment, dataBundle);
         });
 
         // Set on click listener for handling toolbar menu clicks
@@ -110,9 +115,10 @@ public class BookingFragment extends Fragment implements BookingAdapter.OnBookin
     @Override
     public void onBookingClicked(int position) {
         Log.d(TAG, "onBookingClicked: " + position);
-        Bundle posBundle = new Bundle();
-        posBundle.putInt("position", position);
+        dataBundle.clear();
+        dataBundle.putInt("position", position);
+        dataBundle.putString("type", "edit");
         NavHostFragment.findNavController(this).navigate(
-                R.id.action_booking_nav_to_bookingEditFragment2, posBundle);
+                R.id.action_booking_nav_to_bookingFormFragment, dataBundle);
     }
 }

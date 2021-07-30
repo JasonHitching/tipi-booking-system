@@ -80,6 +80,26 @@ public class Booking {
         return numberOfDays;
     }
 
+    public void setCustomerFirstName(String customerFirstName) {
+        this.customerFirstName = customerFirstName;
+    }
+
+    public void setCustomerLastName(String customerLastName) {
+        this.customerLastName = customerLastName;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public void setBookingStartDate(LocalDate bookingStartDate) {
+        this.bookingStartDate = bookingStartDate;
+    }
+
+    public void setNumberOfDays(int numberOfDays) {
+        this.numberOfDays = numberOfDays;
+    }
+
     @NonNull
     @Override
     public String toString() {

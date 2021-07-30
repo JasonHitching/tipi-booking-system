@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tipi_stock.R;
+import com.example.tipi_stock.backend.bookings.data.Booking;
 import com.example.tipi_stock.ui.bookings.SharedBookingViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,6 +27,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Fragment used to display an XML form for inputting a new structure booking
@@ -43,6 +47,7 @@ public class BookingFormFragment extends Fragment {
     private TextInputLayout dateTextLayout;
     private SharedBookingViewModel bookingViewModel;
     private Button submitButton;
+    private String editAddFlag;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -82,6 +87,13 @@ public class BookingFormFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view,
                               @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        editAddFlag = getArguments().get("type").toString();
+        if (editAddFlag.equals("edit")) {
+            Log.d(TAG, "onViewCreated: edit booking mode");
+            editFormData(getArguments().getInt("position"));
+        } else {
+            Log.d(TAG, "onViewCreated: new booking mode");
+        }
 
         // Display MaterialDatePicker instance when image button clicked
         calendarButton.setOnClickListener(dateComp -> {
@@ -96,10 +108,8 @@ public class BookingFormFragment extends Fragment {
             dateTextLayout.setHint("Selected date");
         });
 
-
         // On click listener monitoring the form submit button
         submitButton.setOnClickListener(submit -> {
-
             // Concatenate customer address values
             String customerAddress = houseNumber.getText().toString() + " - "
                     + firstLineAddress.getText().toString() + " - "
@@ -129,6 +139,24 @@ public class BookingFormFragment extends Fragment {
             } else {
                 NavHostFragment.findNavController(this).popBackStack();
             }
+        });
+    }
+
+    public void editFormData(int arrayPos) {
+        Booking selectedBooking = bookingViewModel.getBooking(arrayPos);
+        structureText.setText(selectedBooking.getStructureType());
+        // dateText.setText(selectedBooking.getBookingStartDate().toString());
+        costText.setText(String.valueOf(selectedBooking.getCost()));
+        daysText.setText(String.valueOf(selectedBooking.getNumberOfDays()));
+        firstNameText.setText(selectedBooking.getCustomerFirstName());
+        lastNameText.setText(selectedBooking.getCustomerLastName());
+        firstLineAddress.setText(selectedBooking.getCustomerAddress());
+
+        submitButton.setOnClickListener(view1 -> {
+            selectedBooking.setStructureType(structureText.toString());
+            selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
+            selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
+            bookingViewModel.updateBooking(selectedBooking);
         });
     }
 }
