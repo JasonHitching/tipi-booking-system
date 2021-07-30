@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/booking_nav">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/booking_nav"
@@ -33,7 +33,8 @@
         android:id="@+id/loginFragment"
         android:name="com.example.tipi_stock.ui.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/login_fragment">
+        tools:layout="@layout/login_fragment"
+        app:startDestination="@id/action_loginFragment_to_registerFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />

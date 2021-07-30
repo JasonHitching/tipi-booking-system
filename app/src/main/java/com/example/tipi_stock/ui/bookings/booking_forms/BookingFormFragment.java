@@ -43,7 +43,7 @@ public class BookingFormFragment extends Fragment {
     private MaterialDatePicker bookingDateSelector;
     private ImageButton calendarButton;
     private TextInputEditText dateText, structureText, firstNameText, lastNameText, costText, daysText,
-                                firstLineAddress, postcode, houseNumber;
+                                firstLineAddress;
     private TextInputLayout dateTextLayout;
     private SharedBookingViewModel bookingViewModel;
     private Button submitButton;
@@ -72,8 +72,6 @@ public class BookingFormFragment extends Fragment {
         costText = rootView.findViewById(R.id.booking_cost);
         daysText = rootView.findViewById(R.id.num_days_text);
         firstLineAddress = rootView.findViewById(R.id.address_text);
-        postcode = rootView.findViewById(R.id.postcode_text);
-        houseNumber = rootView.findViewById(R.id.house_number_text);
 
         // Handle form buttons
         submitButton = rootView.findViewById(R.id.submit_form_button);
@@ -104,10 +102,6 @@ public class BookingFormFragment extends Fragment {
             Log.d(TAG, "onViewCreated: new booking mode");
             // On click listener monitoring the form submit button
             submitButton.setOnClickListener(submit -> {
-                // Concatenate customer address values
-                String customerAddress = houseNumber.getText().toString() + " - "
-                        + firstLineAddress.getText().toString() + " - "
-                        + postcode.getText().toString();
 
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
                 String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
@@ -116,7 +110,7 @@ public class BookingFormFragment extends Fragment {
                         Objects.requireNonNull(structureText.getText()).toString(),
                         Objects.requireNonNull(firstNameText.getText()).toString(),
                         Objects.requireNonNull(lastNameText.getText()).toString(),
-                        customerAddress,
+                        Objects.requireNonNull(firstLineAddress.getText()).toString(),
                         Objects.requireNonNull(costText.getText()).toString(),
                         LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
                         Objects.requireNonNull(daysText.getText()).toString());
