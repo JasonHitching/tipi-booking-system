@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/aref_ruqaa_bold"
+        android:fontFamily="cursive"
         android:text="Tipi Manager"
         android:textColor="#0E0D0D"
         android:textSize="50sp"

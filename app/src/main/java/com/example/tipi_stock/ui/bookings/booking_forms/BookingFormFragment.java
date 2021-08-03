@@ -95,6 +95,9 @@ public class BookingFormFragment extends Fragment {
                 selectedBooking.setStructureType(structureText.getText().toString());
                 selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
                 selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
+                selectedBooking.setCustomerFirstName(firstNameText.getText().toString());
+                selectedBooking.setCustomerLastName(lastNameText.getText().toString());
+                selectedBooking.setCustomerAddress(firstLineAddress.getText().toString());
                 bookingViewModel.updateBooking(selectedBooking);
                 NavHostFragment.findNavController(this).popBackStack();
             });
