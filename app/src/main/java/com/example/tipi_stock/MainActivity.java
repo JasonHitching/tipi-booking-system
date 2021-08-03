@@ -1,6 +1,9 @@
 package com.example.tipi_stock;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.view.View;
 
 import com.example.tipi_stock.databinding.ActivityMainBinding;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     private FirebaseAuth firebaseAuthenticator;
 
+    PowerManager.WakeLock sysWakeLock;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         bookingViewModel = new ViewModelProvider(this).get(SharedBookingViewModel.class);
+
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        sysWakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "Tipi:tipitWakeLock");
+        sysWakeLock.acquire();
     }
 
     // Function for hiding bottom navigation when required
