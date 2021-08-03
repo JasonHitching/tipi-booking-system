@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +49,7 @@ public class BookingFormFragment extends Fragment {
     private SharedBookingViewModel bookingViewModel;
     private Button submitButton;
     private String editAddFlag;
-    Booking selectedBooking;
+    private Booking selectedBooking;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -106,36 +107,41 @@ public class BookingFormFragment extends Fragment {
             // On click listener monitoring the form submit button
             submitButton.setOnClickListener(submit -> {
 
-                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
-                String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
+                if (checkEmpty()) {
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM-d-yyyy");
+                    String replaceCommas = dateText.getText().toString().replaceAll(", ", " ");
 
-                String result = bookingViewModel.createBooking(
-                        Objects.requireNonNull(structureText.getText()).toString(),
-                        Objects.requireNonNull(firstNameText.getText()).toString(),
-                        Objects.requireNonNull(lastNameText.getText()).toString(),
-                        Objects.requireNonNull(firstLineAddress.getText()).toString(),
-                        Objects.requireNonNull(costText.getText()).toString(),
-                        LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
-                        Objects.requireNonNull(daysText.getText()).toString());
+                    String result = bookingViewModel.createBooking(
+                            Objects.requireNonNull(structureText.getText()).toString(),
+                            Objects.requireNonNull(firstNameText.getText()).toString(),
+                            Objects.requireNonNull(lastNameText.getText()).toString(),
+                            Objects.requireNonNull(firstLineAddress.getText()).toString(),
+                            Objects.requireNonNull(costText.getText()).toString(),
+                            LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
+                            Objects.requireNonNull(daysText.getText()).toString());
 
-                // If the booking wasn't a success, display a dialog window the the reason
-                if (!result.equals("success")) {
-                    // Obtain the view context to be used to display the dialog
-                    Context viewContext = view.getRootView().getContext();
+                    // If the booking wasn't a success, display a dialog window the the reason
+                    if (!result.equals("success")) {
+                        // Obtain the view context to be used to display the dialog
+                        Context viewContext = view.getRootView().getContext();
 
-                    AlertDialog.Builder incorrectInput = new AlertDialog.Builder(viewContext);
-                    incorrectInput.setMessage(result);
-                    incorrectInput.setPositiveButton("Okay", (dialogInterface, i) -> {});
-                    incorrectInput.create().show();
+                        AlertDialog.Builder incorrectInput = new AlertDialog.Builder(viewContext);
+                        incorrectInput.setMessage(result);
+                        incorrectInput.setPositiveButton("Okay", (dialogInterface, i) -> {});
+                        incorrectInput.create().show();
+                    } else {
+                        NavHostFragment.findNavController(this).popBackStack();
+                    }
                 } else {
-                    NavHostFragment.findNavController(this).popBackStack();
+                    Toast.makeText(getActivity(), "Empty fields, please fill all of them!",
+                            Toast.LENGTH_LONG).show();
                 }
             });
         }
 
         // Display MaterialDatePicker instance when image button clicked
         calendarButton.setOnClickListener(dateComp -> {
-            bookingDateSelector.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(),
+            bookingDateSelector.show(requireActivity().getSupportFragmentManager(),
                     "DATE_PICKER");
         });
 
@@ -151,11 +157,51 @@ public class BookingFormFragment extends Fragment {
     public void editFormData(int arrayPos) {
         selectedBooking = bookingViewModel.getBooking(arrayPos);
         structureText.setText(selectedBooking.getStructureType());
-        // dateText.setText(selectedBooking.getBookingStartDate().toString());
+        dateText.setText(selectedBooking.getBookingStartDate().toString());
         costText.setText(String.valueOf(selectedBooking.getCost()));
         daysText.setText(String.valueOf(selectedBooking.getNumberOfDays()));
         firstNameText.setText(selectedBooking.getCustomerFirstName());
         lastNameText.setText(selectedBooking.getCustomerLastName());
         firstLineAddress.setText(selectedBooking.getCustomerAddress());
+    }
+
+    public boolean checkEmpty() {
+        boolean notEmpty = true;
+        if (structureText.getText().toString().isEmpty()) {
+            structureText.setError("Field requires input!");
+            notEmpty = false;
+        }
+
+        if (dateText.getText().toString().isEmpty()) {
+            dateText.setError("Field requires input");
+            notEmpty = false;
+        }
+
+        if (costText.getText().toString().isEmpty()) {
+            costText.setError("Field requires input");
+            notEmpty = false;
+        }
+
+        if (daysText.getText().toString().isEmpty()) {
+            daysText.setError("Field requires input");
+            notEmpty = false;
+        }
+
+        if (firstNameText.getText().toString().isEmpty()) {
+            firstNameText.setError("Field requires input");
+            notEmpty = false;
+        }
+
+        if (lastNameText.getText().toString().isEmpty()) {
+            lastNameText.setError("Field requires input!");
+            notEmpty = false;
+        }
+
+        if (firstLineAddress.getText().toString().isEmpty()){
+            firstLineAddress.setError("Field requires input");
+            notEmpty = false;
+        }
+
+        return notEmpty;
     }
 }

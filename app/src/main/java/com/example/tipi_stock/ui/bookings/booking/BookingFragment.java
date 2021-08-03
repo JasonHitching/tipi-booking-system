@@ -76,7 +76,7 @@ public class BookingFragment extends Fragment implements BookingAdapter.OnBookin
 
 
         // Add a live data observer
-        sharedBookingViewModel.getAllBookings().observe(this, bookings -> bookingAdapter.setBookings(bookings));
+        sharedBookingViewModel.getAllBookings().observe(getViewLifecycleOwner(), bookings -> bookingAdapter.setBookings(bookings));
 
         FloatingActionButton newBookingFab = rootView.findViewById(R.id.new_booking_fab);
 

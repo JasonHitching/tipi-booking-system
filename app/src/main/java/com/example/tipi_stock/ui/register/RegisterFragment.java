@@ -32,7 +32,7 @@ public class RegisterFragment extends Fragment {
 
     private FirebaseAuth authenticator;
     private Button registerButton;
-    private TextInputLayout emailTextInput, passwordTextInput;
+    private TextInputLayout emailTextInput, passwordTextInput, confirmPasswordTextInput;
     private View rootView;
 
 
@@ -48,15 +48,42 @@ public class RegisterFragment extends Fragment {
         registerButton = rootView.findViewById(R.id.register_button);
         emailTextInput = rootView.findViewById(R.id.email_text_field);
         passwordTextInput = rootView.findViewById(R.id.password_text_field);
+        confirmPasswordTextInput = rootView.findViewById(R.id.check_password_text_field);
 
         authenticator = FirebaseAuth.getInstance();
 
         registerButton.setOnClickListener( registerButton -> {
             String emailText = emailTextInput.getEditText().getText().toString();
             String passwordText = passwordTextInput.getEditText().getText().toString();
-            createNewAccount(emailText, passwordText);
+            String checkPasswordText = confirmPasswordTextInput.getEditText().getText().toString();
+
+            if (!checkFormInput(emailText, passwordText, checkPasswordText)) {
+                Toast.makeText(getActivity(), "Register error, check fields.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                createNewAccount(emailText, passwordText);
+            }
         });
 
+    }
+
+    public boolean checkFormInput(String emailText, String passwordText, String checkPasswordText) {
+        boolean isPopulated = true;
+        if (emailText.isEmpty()) {
+            emailTextInput.setError("Field required!");
+            isPopulated = false;
+        }
+
+        if (passwordText.isEmpty()) {
+            passwordTextInput.setError("Field required");
+            isPopulated = false;
+        }
+
+        if (!passwordText.equals(checkPasswordText)) {
+            passwordTextInput.setError("Passwords dont match");
+        }
+
+        return isPopulated;
     }
 
     /**
