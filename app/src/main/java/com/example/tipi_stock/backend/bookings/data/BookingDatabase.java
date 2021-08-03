@@ -80,6 +80,42 @@ public abstract class BookingDatabase extends RoomDatabase {
                     LocalDate.of(2022, 1, 22), 2);
             dao.insertBooking(marqueeBooking);
 
+            Booking marqueeBooking2 = new Booking( "Marquee",
+                    "Daniel", "Rose",
+                    "26 Flyway Drive TY5YYH",500,
+                    LocalDate.of(2022, 1, 22), 2);
+            dao.insertBooking(marqueeBooking2);
+
+            Booking tipiBooking2 = new Booking( "Tipi",
+                    "Jason", "Hitching",
+                    "76 Inway Drive KL25TP", 233,
+                    LocalDate.of(2021, 6, 3), 10);
+            dao.insertBooking(tipiBooking2);
+
+            Booking tipiBooking3 = new Booking( "Tipi",
+                    "Jason", "Hitching",
+                    "76 Inway Drive KL25TP", 233,
+                    LocalDate.of(2021, 6, 3), 10);
+            dao.insertBooking(tipiBooking3);
+
+            Booking tipiBooking4 = new Booking( "Tipi",
+                    "Jason", "Hitching",
+                    "76 Inway Drive KL25TP", 233,
+                    LocalDate.of(2021, 6, 3), 10);
+            dao.insertBooking(tipiBooking4);
+
+            Booking stretchBooking2 = new Booking("Stetch Tent",
+                    "Joe", "Copping",
+                    "1 Pleasant Drive GT53DP",800,
+                    LocalDate.of(2021, 8, 1), 5);
+            dao.insertBooking(stretchBooking2);
+
+            Booking stretchBooking3 = new Booking("Stetch Tent",
+                    "Joe", "Copping",
+                    "1 Pleasant Drive GT53DP",800,
+                    LocalDate.of(2021, 8, 1), 5);
+            dao.insertBooking(stretchBooking3);
+
         });
     }
 }
