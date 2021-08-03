@@ -138,7 +138,7 @@ public class BookingFormFragment extends Fragment {
 
         // Display MaterialDatePicker instance when image button clicked
         calendarButton.setOnClickListener(dateComp -> {
-            bookingDateSelector.show(Objects.requireNonNull(getActivity()).getSupportFragmentManager(),
+            bookingDateSelector.show(requireActivity().getSupportFragmentManager(),
                     "DATE_PICKER");
         });
 
