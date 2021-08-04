@@ -81,6 +81,7 @@ public class RegisterFragment extends Fragment {
 
         if (!passwordText.equals(checkPasswordText)) {
             passwordTextInput.setError("Passwords dont match");
+            isPopulated = false;
         }
 
         return isPopulated;
