@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         sysWakeLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "Tipi:tipitWakeLock");
-        sysWakeLock.acquire();
     }
 
     // Function for hiding bottom navigation when required
@@ -70,4 +69,5 @@ public class MainActivity extends AppCompatActivity {
             navView.setVisibility(View.VISIBLE);
         }
     }
+
 }

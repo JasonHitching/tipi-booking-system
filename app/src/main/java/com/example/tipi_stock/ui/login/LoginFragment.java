@@ -2,7 +2,7 @@ package com.example.tipi_stock.ui.login;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Patterns;
+import android.util.*;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
