@@ -93,14 +93,23 @@ public class BookingFormFragment extends Fragment {
         if (editAddFlag.equals("edit")) {
             editFormData(getArguments().getInt("position"));
             submitButton.setOnClickListener(view1 -> {
-                selectedBooking.setStructureType(structureText.getText().toString());
-                selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
-                selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
-                selectedBooking.setCustomerFirstName(firstNameText.getText().toString());
-                selectedBooking.setCustomerLastName(lastNameText.getText().toString());
-                selectedBooking.setCustomerAddress(firstLineAddress.getText().toString());
-                bookingViewModel.updateBooking(selectedBooking);
-                NavHostFragment.findNavController(this).popBackStack();
+                String hireDays = daysText.getText().toString();
+                String cost = costText.getText().toString();
+
+                if (checkDoubleNumeric(cost) && checkIntegerNumeric(hireDays)) {
+                    selectedBooking.setStructureType(structureText.getText().toString());
+                    selectedBooking.setCost(Double.parseDouble(costText.getText().toString()));
+                    selectedBooking.setNumberOfDays(Integer.parseInt(daysText.getText().toString()));
+                    selectedBooking.setCustomerFirstName(firstNameText.getText().toString());
+                    selectedBooking.setCustomerLastName(lastNameText.getText().toString());
+                    selectedBooking.setCustomerAddress(firstLineAddress.getText().toString());
+                    bookingViewModel.updateBooking(selectedBooking);
+                    NavHostFragment.findNavController(this).popBackStack();
+                } else {
+                    Toast.makeText(getActivity(), "Invalid cost or days input, is it a number?",
+                            Toast.LENGTH_LONG).show();
+                }
+                
             });
         } else {
             Log.d(TAG, "onViewCreated: new booking mode");
@@ -120,7 +129,7 @@ public class BookingFormFragment extends Fragment {
                             LocalDate.parse(replaceCommas.replace(" ", "-"), dateFormatter),
                             Objects.requireNonNull(daysText.getText()).toString());
 
-                    // If the booking wasn't a success, display a dialog window the the reason
+                    // If the booking wasn't a success, display a dialog window with the reason
                     if (!result.equals("success")) {
                         // Obtain the view context to be used to display the dialog
                         Context viewContext = view.getRootView().getContext();
@@ -152,6 +161,24 @@ public class BookingFormFragment extends Fragment {
             dateTextLayout.setHint("Selected date");
         });
 
+    }
+
+    public boolean checkDoubleNumeric(String input) {
+        try {
+            Double inputDouble = new Double(input);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+    }
+
+    public boolean checkIntegerNumeric(String input) {
+        try {
+            Integer inputInteger = new Integer(input);
+            return true;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
     public void editFormData(int arrayPos) {
