@@ -155,6 +155,10 @@ public class SharedBookingViewModel extends AndroidViewModel {
         return false;
     }
 
+    public void setCurrentBookings(LiveData<List<Booking>> bookings) {
+        this.currentBookings = bookings;
+    }
+
     public void updateBooking(Booking booking) {
         roomRepo.updateBooking(booking);
     }
