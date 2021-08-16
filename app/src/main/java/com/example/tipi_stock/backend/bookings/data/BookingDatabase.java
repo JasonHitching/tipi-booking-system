@@ -15,6 +15,23 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Database class used for creating, retrieving
+ * and populating database instances
+ *
+ * Top level libraries used:
+ *      https://developer.android.com/reference/android/arch/persistence/room/package-summary
+ *
+ * Sub libraries:
+ *      https://developer.android.com/reference/android/arch/persistence/room/DatabaseConfiguration
+ *      https://developer.android.com/reference/android/arch/persistence/room/Room
+ *      https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase
+ *      https://developer.android.com/reference/android/arch/persistence/room/RoomDatabase.Builder
+ *
+ * Annotation sub-libraries:
+ *      https://developer.android.com/reference/android/arch/persistence/room/Database
+ *      https://developer.android.com/reference/android/arch/persistence/room/TypeConverters
+ */
 @Database(entities = {Booking.class}, version = 7, exportSchema = true)
 @TypeConverters({DateConverter.class})
 public abstract class BookingDatabase extends RoomDatabase {

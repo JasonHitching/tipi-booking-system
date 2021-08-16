@@ -8,6 +8,12 @@ import java.util.Date;
 /**
  * Class for converting a Long value to a Date and vice versa
  * The Room persistence library knows how to persist Long objects but not Date objects
+ *
+ * Top level libraries used:
+ *  https://developer.android.com/reference/android/arch/persistence/room/package-summary
+ *
+ * Annotation Sub-library:
+ * https://developer.android.com/reference/android/arch/persistence/room/TypeConverter
  */
 public class DateConverter {
 

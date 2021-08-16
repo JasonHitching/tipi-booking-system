@@ -12,6 +12,15 @@ import java.util.List;
 /**
  * Booking data access object (DAO) that provides abstract methods
  * for accessing and manipulating data in the bookings database
+ *
+ * Top level libraries used:
+ *      https://developer.android.com/reference/android/arch/persistence/room/package-summary
+ *
+ * Annotation sub libraries used:
+ *      https://developer.android.com/reference/android/arch/persistence/room/Dao
+ *      https://developer.android.com/reference/android/arch/persistence/room/Query
+ *      https://developer.android.com/reference/android/arch/persistence/room/Insert
+ *      https://developer.android.com/reference/android/arch/persistence/room/Update
  */
 @Dao
 public interface BookingDao {

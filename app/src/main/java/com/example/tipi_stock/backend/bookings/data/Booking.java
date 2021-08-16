@@ -10,6 +10,13 @@ import java.time.LocalDate;
 
 /**
  * Entity model of a structure booking
+ *
+ * Top level libraries used:
+ *      https://developer.android.com/reference/android/arch/persistence/room/package-summary
+ *
+ * Annotation sub-libraries
+ *      https://developer.android.com/reference/android/arch/persistence/room/Entity
+ *      https://developer.android.com/reference/android/arch/persistence/room/PrimaryKey
  */
 @Entity(tableName = "booking_table")
 public class Booking {

@@ -10,6 +10,7 @@ import java.util.List;
  * Class for interacting with the 'booking Room database'
  */
 public class BookingRepository {
+
     private BookingDao bookingDao;
     private LiveData<List<Booking>> currentBookings;
 
