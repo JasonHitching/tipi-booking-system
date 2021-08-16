@@ -105,8 +105,15 @@ public class SharedBookingViewModel extends AndroidViewModel {
     public String createBooking(String structType, String firstName, String lastName, String address,
                                 String cost, LocalDate startDate, String noOfDays) {
 
-        double costVal = new Double(cost);
-        int numOfDays = new Integer(noOfDays);
+        double costVal;
+        int numOfDays;
+
+        try {
+            costVal = new Double(cost);
+            numOfDays = new Integer(noOfDays);
+        } catch (NumberFormatException ex) {
+            return "Invalid number input, check cost and days";
+        }
 
         LocalDate todaysDate = LocalDate.now();
 
